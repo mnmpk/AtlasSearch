@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="~/" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link href="css/mdbfonts.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+    <link href="css/leafy.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    @RenderBody()
+
+    
+    <script src="js/json-formatter.js"></script>
+    <script>
+        var errCt = 0;
+        window.makeJsonPrettyGlobal = function() {
+            if(errCt < 5) {
+                try {
+                    const toRenderDivs = document.querySelectorAll("div.prepareForPrettyJson");
+                    if(toRenderDivs.length == 0) {
+                        setTimeout(makeJsonPrettyGlobal(), 500);
+                    } else {
+                        toRenderDivs.forEach(function(toRender) {
+                            console.log(toRender.innerText);
+                            const rawJsonAsText = toRender.innerText;
+                            const rawJson = JSON.parse(rawJsonAsText);
+                            // https://www.npmjs.com/package/json-formatter-js
+                            const formatted = new JSONFormatter(rawJson, 0);
+
+                            toRender.removeChild(toRender.firstChild);
+                            toRender.appendChild(formatted.render());
+                            toRender.classList.remove("prepareForPrettyJson");
+                        });
+                    }
+                } catch (err) {
+                    console.log(errCt);
+                    console.log(err);
+                    errCt++;
+                    setTimeout(makeJsonPrettyGlobal, 500);
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
