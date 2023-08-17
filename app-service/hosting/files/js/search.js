@@ -34,7 +34,7 @@ async function login() {
 async function call() {
     await app.currentUser.refreshCustomData();
     let query = { "s": $("input[name='search']:checked").val(), "q": $('#search').val() };
-    render(await app.currentUser.functions.search(query));
+    render(await app.currentUser.functions.local(query));
 /*
     var letters = $('#search').val();
     var collection = $('#collection').val();
