@@ -90,7 +90,7 @@ function render(results) {
             <h5 class="card-title">${item.year}</h5>
             ${highlight(item)}
             
-            <button class="btn btn-leafy btn-sm" click="mlt(${item})">Find More Like This</button>
+            <button class="btn btn-leafy btn-sm mlt">Find More Like This</button>
             ${item.poster ? `<img class="moviePoster" src="${item.poster}" width="50px" />` : ""}
             <div class="moviePoster">${item.title}</div>
             <p>This is unique!</p>
@@ -105,7 +105,11 @@ function render(results) {
     </div>
     `;
     });
-    placholder.append(html);
+    var e = $(html);
+    e.find("button.mlt").on("click",function(){
+        mlt(item);
+    });
+    placholder.append(e);
     /*setTimeout(function () {
         $("#overlay").fadeOut(300);
     }, 500);
