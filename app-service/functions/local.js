@@ -35,6 +35,22 @@ exports = function(query) {
         },
       });
     }
+    agg_pipeline.push({
+      $project:
+        {
+          title: 1,
+          fullplot: 1,
+          year: 1,
+          genres: 1,
+          poster: 1,
+          score: {
+            $meta: "searchScore",
+          },
+          highlights: {
+            $meta: "searchHighlights",
+          },
+        },
+    });
     const results = context.services.get("mongodb-atlas").db("sample_mflix").collection("movies").aggregate(agg_pipeline);
     return results; 
 };

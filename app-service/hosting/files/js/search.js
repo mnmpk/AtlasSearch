@@ -34,7 +34,7 @@ async function login() {
 async function call() {
     await app.currentUser.refreshCustomData();
     let query = { "s": $("input[name='search']:checked").val(), "q": $('#search').val() };
-    await app.currentUser.functions.local(query);
+    render(await app.currentUser.functions.search(query));
 /*
     var letters = $('#search').val();
     var collection = $('#collection').val();
@@ -70,8 +70,39 @@ async function call() {
 }
 
 
-function render(letters, results) {
-    setTimeout(function () {
+function render(results) {
+
+    var placholder = $('#results');
+    placholder.empty();
+
+    let html = '';
+    $.each(results, function (index, item) {
+
+        let doc = item.document;
+
+        html += `
+        <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">${item.year}</h5>
+            ${highlight(item)}
+            
+            <button class="btn btn-leafy btn-sm" @onclick="RunSearch">Find More Like This</button>
+            ${item.poster?`<img class="moviePoster" src="${item.poster}" width="50px" />`:""}
+            <div class="moviePoster">${item.title}</div>
+            <p>This is unique!</p>
+
+            <div class="card-footer text-muted">
+                Score: ${item.score}
+            </div>
+
+            <button class="btn btn-leafy btn-sm" @onclick="LearnMoreClicked" data-bs-toggle="modal"
+                data-bs-target="#ctr_modal">Learn More</button>
+        </div>
+    </div>
+    `;
+    });
+    placholder.append(html);
+    /*setTimeout(function () {
         $("#overlay").fadeOut(300);
     }, 500);
     var placholder = $('#search-results-placholder');
@@ -106,12 +137,26 @@ function render(letters, results) {
         }
     });
     // place in html
-    placholder.append(html);
+    placholder.append(html);*/
 }
 
-function highlight(highlights_arr) {
+function highlight(item) {
     let txt = ``;
-    highlights_arr.forEach(function (highlight) {
+    if(item.highlights){
+        item.highlights.forEach(function (highlight) {
+            highlight.texts.forEach(function (item) {
+                if (item.type == 'hit') {
+                    txt += `<span class="highlight-hit">${item.value}</span>`;
+                }
+                else {
+                    txt += `<span>${item.value}</span>`;
+                }
+            });
+        });
+    }else{
+        txt += `<p class="card-text">${item.Plot}</p>`;
+    }
+    /*highlights_arr.forEach(function (highlight) {
         if (highlight.path instanceof Object) {
             txt += `<h3>matched path: ${highlight.path.value}, analyzer: ${highlight.path.multi}</h3><p>`;
         } else {
@@ -126,6 +171,6 @@ function highlight(highlights_arr) {
             }
         });
     });
-    txt += `</p>`;
-    return txt
+    txt += `</p>`;*/
+    return txt;
 }
