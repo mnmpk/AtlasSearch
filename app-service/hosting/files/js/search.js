@@ -69,8 +69,18 @@ async function call() {
         }*/
 }
 
-async function mlt(item) {
+async function mlt(e, item) {
     console.log(item);
+    const mlt = await app.currentUser.functions.local({ "c": "4", "t": item.title, "g":item.genres, "fp": item.fullplot })
+    e.find(".mlt").empty();
+    if(mlt.length){
+        $.each(mlt, function (index, item) {
+            e.find(".mlt").append(`<div style="width:50px;">${item.poster?'<img class="img-fluid" src="${item.poster} />':""}${item.title}</div>`);
+        });
+    }else{
+        e.find(".mlt").append(`<p>This is unique!</p>`);
+    }
+    
 }
 
 
@@ -83,13 +93,13 @@ function render(results) {
         var e = $(`
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">${item.year}</h5>
+                <h5 class="card-title">${item.title}(${item.year})</h5>
+                <img class="img-fluid" src="${item.poster}" />
                 ${highlight(item)}
                 
-                <button class="btn btn-leafy btn-sm mlt">Find More Like This</button>
-                ${item.poster ? `<img class="moviePoster" src="${item.poster}" width="50px" />` : ""}
-                <div class="moviePoster">${item.title}</div>
-                <p>This is unique!</p>
+                <div class="mlt">
+                    <button class="btn btn-leafy btn-sm">Find More Like This</button>
+                </div>
 
                 <div class="card-footer text-muted">
                     Score: ${item.score}
@@ -99,8 +109,8 @@ function render(results) {
                     data-bs-target="#ctr_modal">Learn More</button>
             </div>
         </div>`);
-        e.find("button.mlt").on("click",function(){
-            mlt(item);
+        e.find(".mlt button").on("click",function(){
+            mlt(e, item);
         });
         placholder.append(e);
     });
