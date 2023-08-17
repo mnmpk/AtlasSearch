@@ -28,7 +28,7 @@ exports = function(query) {
     // const result = context.functions.execute("function_name", arg1, arg2);
     
     let agg_pipeline = [];
-    if(s==1){
+    if(s=="1"){
       agg_pipeline.push({
         "$match": {
           "_id": new BSON.ObjectId(q),
