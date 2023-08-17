@@ -4,7 +4,7 @@ exports = function(query) {
     // Data can be extracted from the request as follows:
 
     // Query params, e.g. '?arg1=hello&arg2=world' => {arg1: "hello", arg2: "world"}
-    const {q} = query;
+    const {s, q} = query;
 
     // Headers, e.g. {"Content-Type": ["application/json"]}
     //const contentTypes = headers["Content-Type"];
@@ -27,13 +27,14 @@ exports = function(query) {
     // Calling a function:
     // const result = context.functions.execute("function_name", arg1, arg2);
     
-    const agg_pipeline = [
-      {
+    let agg_pipeline = [];
+    if(s==1){
+      agg_pipeline.push({
         "$match": {
-          "_id": new ObjectId(q),
+          "_id": new BSON.ObjectId(q),
         },
-      },
-    ];
+      });
+    }
     const results = context.services.get("mongodb-atlas").db("sample_mflix").collection("movies").aggregate(agg_pipeline);
     return results; 
 };

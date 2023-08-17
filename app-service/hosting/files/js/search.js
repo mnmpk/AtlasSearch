@@ -33,7 +33,7 @@ async function login() {
 
 async function call() {
     await app.currentUser.refreshCustomData();
-    let query = { "q": $('#search').val() };
+    let query = { "s": $("input[name='search']:checked").val(), "q": $('#search').val() };
     await app.currentUser.functions.local(query);
 /*
     var letters = $('#search').val();
