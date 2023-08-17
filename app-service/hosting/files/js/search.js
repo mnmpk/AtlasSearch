@@ -74,7 +74,7 @@ async function mlt(e, item) {
     e.find(".mlt").empty();
     if(mlt.length){
         $.each(mlt, function (index, i) {
-            e.find(".mlt").append(`<div>${i.poster?'<img class="img-fluid" src="'+i.poster+'" />':""}${i.title}</div>`);
+            e.find(".mlt").append(`<div class="col">${i.poster?'<img class="img-fluid" src="'+i.poster+'" />':""}${i.title}</div>`);
         });
     }else{
         e.find(".mlt").append(`<p>This is unique!</p>`);
@@ -92,11 +92,11 @@ function render(results) {
         var e = $(`
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">${item.title}(${item.year})</h5>
+                <h5 class="card-title">${item.title} (${item.year})</h5>
                 <img class="img-fluid" src="${item.poster}" />
                 ${highlight(item)}
                 
-                <div class="mlt">
+                <div class="mlt row">
                     <button class="btn btn-leafy btn-sm">Find More Like This</button>
                 </div>
 
@@ -121,18 +121,25 @@ function render(results) {
 function highlight(item) {
     let txt = ``;
     if (item.highlights) {
-        item.highlights.forEach(function (highlight) {
-            highlight.texts.forEach(function (item) {
-                if (item.type == 'hit') {
-                    txt += `<span class="highlight-hit">${item.value}</span>`;
-                }
-                else {
-                    txt += `<span>${item.value}</span>`;
-                }
+        var hs = item.highlights.filter(h=>h.path=="fullplot");
+        if(hs){
+            txt += `<p class="card-text">`;
+            hs.forEach(function (highlight) {
+                highlight.texts.forEach(function (item) {
+                    if (item.type == 'hit') {
+                        txt += `<span class="highlight-hit">${item.value}</span>`;
+                    }
+                    else {
+                        txt += `<span>${item.value}</span>`;
+                    }
+                });
             });
-        });
+            txt += `</p>`;
+        } else {
+            txt += `<p class="card-text">${item.fullplot}</p>`;
+        }  
     } else {
-        txt += `<p class="card-text">${item.Plot}</p>`;
+        txt += `<p class="card-text">${item.fullplot}</p>`;
     }
     return txt;
 }
