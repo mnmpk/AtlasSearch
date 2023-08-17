@@ -57,7 +57,7 @@ exports = function (query) {
         path: ["fullplot", "title"],
       }
     };
-    if (s=="Score") {
+    if (s=="Release Year") {
       search["sortBetaV1"] = {
         year: -1,
       };

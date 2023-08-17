@@ -69,6 +69,10 @@ async function call() {
         }*/
 }
 
+async function mlt(item) {
+    console.log(item);
+}
+
 
 function render(results) {
 
@@ -86,7 +90,7 @@ function render(results) {
             <h5 class="card-title">${item.year}</h5>
             ${highlight(item)}
             
-            <button class="btn btn-leafy btn-sm" @onclick="RunSearch">Find More Like This</button>
+            <button class="btn btn-leafy btn-sm" click="mlt(${item})">Find More Like This</button>
             ${item.poster ? `<img class="moviePoster" src="${item.poster}" width="50px" />` : ""}
             <div class="moviePoster">${item.title}</div>
             <p>This is unique!</p>
