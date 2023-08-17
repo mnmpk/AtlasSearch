@@ -37,6 +37,7 @@ exports = function(query) {
     }else if(s=="2"){
       agg_pipeline.push({
         "$search": {
+          index:"sort",
           text: {
             query: q,
             path: ["title", "fullplot"]
