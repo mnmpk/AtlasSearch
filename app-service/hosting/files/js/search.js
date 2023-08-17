@@ -79,73 +79,34 @@ function render(results) {
     var placholder = $('#results');
     placholder.empty();
 
-    let html = '';
     $.each(results, function (index, item) {
-
-        let doc = item.document;
-
-        html += `
+        var e = $(`
         <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">${item.year}</h5>
-            ${highlight(item)}
-            
-            <button class="btn btn-leafy btn-sm mlt">Find More Like This</button>
-            ${item.poster ? `<img class="moviePoster" src="${item.poster}" width="50px" />` : ""}
-            <div class="moviePoster">${item.title}</div>
-            <p>This is unique!</p>
+            <div class="card-body">
+                <h5 class="card-title">${item.year}</h5>
+                ${highlight(item)}
+                
+                <button class="btn btn-leafy btn-sm mlt">Find More Like This</button>
+                ${item.poster ? `<img class="moviePoster" src="${item.poster}" width="50px" />` : ""}
+                <div class="moviePoster">${item.title}</div>
+                <p>This is unique!</p>
 
-            <div class="card-footer text-muted">
-                Score: ${item.score}
+                <div class="card-footer text-muted">
+                    Score: ${item.score}
+                </div>
+
+                <button class="btn btn-leafy btn-sm" @onclick="LearnMoreClicked" data-bs-toggle="modal"
+                    data-bs-target="#ctr_modal">Learn More</button>
             </div>
-
-            <button class="btn btn-leafy btn-sm" @onclick="LearnMoreClicked" data-bs-toggle="modal"
-                data-bs-target="#ctr_modal">Learn More</button>
-        </div>
-    </div>
-    `;
+        </div>`);
+        e.find("button.mlt").on("click",function(){
+            mlt(item);
+        });
+        placholder.append(e);
     });
-    var e = $(html);
-    e.find("button.mlt").on("click",function(){
-        mlt(item);
-    });
-    placholder.append(e);
     /*setTimeout(function () {
         $("#overlay").fadeOut(300);
-    }, 500);
-    var placholder = $('#search-results-placholder');
-    placholder.empty();
-    deleteMarkers();
-
-    // update count
-    $('#result-count').html(results.length)
-    // update search query
-    $('#search-query').html(letters)
-
-    let html = '';
-    $.each(results, function (index, item) {
-
-        let doc = item.document;
-
-        html += `
-      <article class="search-result row">
-        <div class="col-md-5" style="height:200px;overflow:auto;">
-          <pre><code>${JSON.stringify(doc.content, null, 4)}</code></pre>
-        </div>
-        <div class="col-md-7 excerpet">
-          ${item.highlights ? highlight(item.highlights) : ""}
-          <p>Search score: ${item.score}</p>
-        </div>
-        <span class="clearfix borda"></span>
-      </article>
-    `
-        if (map && doc.location) {
-            var marker = new google.maps.Marker({ map: map, position: { lat: doc.location.coordinates[1], lng: doc.location.coordinates[0] } });
-            markers.push(marker);
-        }
-    });
-    // place in html
-    placholder.append(html);*/
+    }, 500);*/
 }
 
 function highlight(item) {
@@ -164,21 +125,5 @@ function highlight(item) {
     } else {
         txt += `<p class="card-text">${item.Plot}</p>`;
     }
-    /*highlights_arr.forEach(function (highlight) {
-        if (highlight.path instanceof Object) {
-            txt += `<h3>matched path: ${highlight.path.value}, analyzer: ${highlight.path.multi}</h3><p>`;
-        } else {
-            txt += `<h3>matched path: ${highlight.path}</h3><p>`;
-        }
-        highlight.texts.forEach(function (item) {
-            if (item.type == 'hit') {
-                txt += `<b><span class="highlight"> ${item.value} </span></b>`;
-            }
-            else {
-                txt += item.value;
-            }
-        });
-    });
-    txt += `</p>`;*/
     return txt;
 }
