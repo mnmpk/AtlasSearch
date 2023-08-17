@@ -1,5 +1,5 @@
-
-html, body {
+html,
+body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -7,7 +7,8 @@ h1:focus {
     outline: none;
 }
 
-a, .btn-link {
+a,
+.btn-link {
     color: #0071c1;
 }
 
@@ -34,15 +35,15 @@ a, .btn-link {
 }
 
 .row {
-    margin-top:1rem !important;
+    margin-top: 1rem !important;
 }
 
 .sortbox {
-    background-image: url(/BrandAssets/Icons/Technical_MDB_FiltersAndFacets10x.png) !important; 
-    background-size: 32px; 
-    width:12rem !important;
+    background-image: url(/BrandAssets/Icons/Technical_MDB_FiltersAndFacets10x.png) !important;
+    background-size: 32px;
+    width: 12rem !important;
     border-radius: 50px;
-    background-color:  var(--mdb-white);  
+    background-color: var(--mdb-white);
     border-color: var(--mdb-evergreen);
     border-width: 3px;
 }
@@ -58,11 +59,11 @@ a, .btn-link {
 }
 
 .child {
-  width: 50vw;
+    width: 50vw;
 }
 
 input[type="text"] {
-    background-color:  var(--mdb-white);  
+    background-color: var(--mdb-white);
     border-color: var(--mdb-evergreen);
     border-top-left-radius: 50px !important;
     border-bottom-left-radius: 50px !important;
@@ -70,22 +71,9 @@ input[type="text"] {
     border-top-width: 3px;
     border-bottom-width: 8px;
     border-right: none;
-  }
-  
-  .btn-search { 
-      background-color: var(--mdb-white);
-      border-color: var(--mdb-evergreen);
-      border-top-right-radius: 50px !important;
-      border-bottom-right-radius: 50px !important;
-      border-right-width: 3px;
-      border-top-width: 3px;
-      border-bottom-width: 8px;
-      border-left: none;
-      padding: 0px !important;
-      margin: 0px !important;
-  }
-  
-  .btn-search:hover, .btn-search:focus, .btn-search:active, .btn-search.active, .open>.dropdown-toggle.btn-search {
+}
+
+.btn-search {
     background-color: var(--mdb-white);
     border-color: var(--mdb-evergreen);
     border-top-right-radius: 50px !important;
@@ -96,13 +84,30 @@ input[type="text"] {
     border-left: none;
     padding: 0px !important;
     margin: 0px !important;
-  }
-  
-  .autocomplete {
+}
+
+.btn-search:hover,
+.btn-search:focus,
+.btn-search:active,
+.btn-search.active,
+.open>.dropdown-toggle.btn-search {
+    background-color: var(--mdb-white);
+    border-color: var(--mdb-evergreen);
+    border-top-right-radius: 50px !important;
+    border-bottom-right-radius: 50px !important;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 8px;
+    border-left: none;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.autocomplete {
     position: relative;
-  }
-  
-  .autocomplete .options {
+}
+
+.autocomplete .options {
     position: absolute;
     top: 47px;
     left: 0;
@@ -113,50 +118,54 @@ input[type="text"] {
     border: 1px solid #ced4da;
     border-radius: 0.5rem;
     box-shadow: 0 30px 25px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .autocomplete .option {
+}
+
+.autocomplete .option {
     display: block;
     padding: 0.25rem;
-  }
-  .autocomplete .option .option-text {
+}
+
+.autocomplete .option .option-text {
     padding: 0.25rem 0.5rem;
-  }
-  .autocomplete .option:hover {
+}
+
+.autocomplete .option:hover {
     background: #1E90FF;
     color: #fff;
-  }
-  .autocomplete .option.disabled {
+}
+
+.autocomplete .option.disabled {
     background-color: lightgrey;
     cursor: not-allowed;
     border: none;
-  }
-  .autocomplete .option.disabled:hover {
+}
+
+.autocomplete .option.disabled:hover {
     background: lightgrey;
     color: var(--bs-body);
-  }
-  
-  li {
+}
+
+li {
     background-color: var(--mdb-evergreen);
-    width: 50%;
+    width: 50% !important;
     color: var(--mdb-white);
     padding: 3px;
     margin: 5px;
     border-radius: 2rem;
-  }
-  
-  li:hover {
+}
+
+li:hover {
     background-color: var(--mdb-springgreen);
     width: 50%;
     color: var(---bs-body-color);
     padding: 3px;
     margin: 5px;
     border-radius: 2rem;
-  }
-  
-  ul {
+}
+
+ul {
     padding-left: 50px;
     position: absolute;
     z-index: 500;
-    margin-top: 4rem;
-  }
+    margin-top: 4rem !important;
+}

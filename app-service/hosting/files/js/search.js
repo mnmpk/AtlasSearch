@@ -2,6 +2,18 @@
 
 const userAPIKey = "0P0b3hjgzsIhnT0Pq30ffMwOSI6FFQGLCUjvi8dFZZS81AzN3MPLm0jkFw3V8CHX";
 const app = new Realm.App({ id: "search-app-nthoe" });
+let timer = null;
+
+function init() {
+    login();
+    $('.btn-search').click(function () {
+        call();
+    });
+    $('#search').keyup(function () {
+        clearTimeout(timer);
+        timer = setTimeout(call, 1000)
+    });
+}
 
 async function login() {
     try {
@@ -20,7 +32,10 @@ async function login() {
 }
 
 async function call() {
-
+    await app.currentUser.refreshCustomData();
+    let query = { "q": $('#search').val() };
+    await app.currentUser.functions.local(query);
+/*
     var letters = $('#search').val();
     var collection = $('#collection').val();
     var index = $('#index').val();
@@ -51,7 +66,7 @@ async function call() {
         }
 
         render(letters, await app.currentUser.functions.search(query));
-    }
+    }*/
 }
 
 
