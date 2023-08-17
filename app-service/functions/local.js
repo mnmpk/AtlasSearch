@@ -4,7 +4,7 @@ exports = function (query) {
   // Data can be extracted from the request as follows:
 
   // Query params, e.g. '?arg1=hello&arg2=world' => {arg1: "hello", arg2: "world"}
-  const { c, q, s } = query;
+  const { c, q, s, t, g, fp } = query;
 
   // Headers, e.g. {"Content-Type": ["application/json"]}
   //const contentTypes = headers["Content-Type"];
@@ -64,6 +64,29 @@ exports = function (query) {
     }
     agg_pipeline.push({
       "$search": search
+    });
+  } else if (c == "4") {
+    agg_pipeline.push({
+      $search: {
+        index: "sort",
+        moreLikeThis: {
+          like: [
+            {
+              title: t,
+            },
+            {
+              genres: g,
+            },
+            {
+              fullPlot: fp,
+            },
+          ],
+        },
+      },
+    });
+    agg_pipeline.push({
+      $limit:
+        3,
     });
   }
   agg_pipeline.push({

@@ -74,7 +74,7 @@ async function mlt(e, item) {
     e.find(".mlt").empty();
     if(mlt.length){
         $.each(mlt, function (index, item) {
-            e.find(".mlt").append(`<div style="width:50px;">${item.poster?'<img class="img-fluid" src="${item.poster} />':""}${item.title}</div>`);
+            e.find(".mlt").append(`<div>${item.poster?'<img class="img-fluid" src="${item.poster} />':""}${item.title}</div>`);
         });
     }else{
         e.find(".mlt").append(`<p>This is unique!</p>`);
