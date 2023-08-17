@@ -81,8 +81,8 @@ input[type="text"] {
       border-top-width: 3px;
       border-bottom-width: 8px;
       border-left: none;
-      padding: 0px;
-      margin: 0px;
+      padding: 0px !important;
+      margin: 0px !important;
   }
   
   .btn-search:hover, .btn-search:focus, .btn-search:active, .btn-search.active, .open>.dropdown-toggle.btn-search {
@@ -94,8 +94,8 @@ input[type="text"] {
     border-top-width: 3px;
     border-bottom-width: 8px;
     border-left: none;
-    padding: 0px;
-    margin: 0px;
+    padding: 0px !important;
+    margin: 0px !important;
   }
   
   .autocomplete {
