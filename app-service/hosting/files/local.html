@@ -9,13 +9,75 @@
     <link href="css/leafy.css" rel="stylesheet" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-    @RenderBody()
-
-    
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-mist btn-toggler @ShouldShiftLeft" @onclick="ToggleMenu">
+                    <span class="material-symbols-outlined">menu</span>
+                    <span class="material-symbols-outlined">@materialIcon</span>
+                </button>
+                
+                <div class="side-panel fadeIn @NavMenuCssClass">
+                    <div class="scrollable">
+                        <h1>Rapid Development Menu</h1>
+                
+                        <p>Welcome expert programmer!</p>
+                        
+                        <p>With the click of single button in this menu, you can iterate through several versions of this application to 
+                            continually refine the user experience (UX). In doing so, what happens behind the scenes is new refinements will 
+                            be made to the Atlas Search Index to introduce new features to the application. Each version is a superset 
+                            of features from the last.</p>
+                
+                        <p>Get developin'</p>
+                
+                        <ul>
+                            <li><a href="/Search01">Version 1</a> - This will use standard MongoDB "<code>FindOne</code>" or "<code>$match</code>" database queries without Atlas Search. 
+                                It will require an exact match of an ObjectID to find anything.</li>
+                
+                            <li><a href="/Search02">Version 2</a> - Our first iteration of using Atlas Search using a 
+                                <a href="https://github.com/graboskyc/AtlasSearchLocalNYC2023/blob/main/Indexes/default.json" target="_blank">default index</a>.
+                                <ul>
+                                    <li>If you didn't have Atlas Search built in, you may need something like <button class="btn btn-success btn-sm"  @onclick="@(e =>ShowModalArch = true)">this</button></li>
+                                    <li>All we had to do to turn this on is press five mouse clicks like <button class="btn btn-success btn-sm"  @onclick="@(e =>ShowModalIndex = true)">this</button></li>
+                                </ul>    
+                            </li>
+                
+                            <li><a href="/Results03/ghostbusters">Version 3</a> - Introduces showing the search score and highlighting to the user so the user 
+                                can understand relevance. It also uses custom sorting to sort by year rather than relevance. It uses a 
+                                <a href="https://github.com/graboskyc/AtlasSearchLocalNYC2023/blob/main/Indexes/sort.json" target="_blank">refined index</a> 
+                                that only indexes the fields used (<code>fullplot</code>, <code>title</code>, and <code>year</code>).</li>
+                
+                            <li><a href="/Results04/ghostbusters">Version 4</a> - Adds a recommendation engine utilizing MoreLikeThis inside the Search stage. The 
+                                <a href="https://github.com/graboskyc/AtlasSearchLocalNYC2023/blob/main/AtlasSearchNYC/Shared/MLT.razor#L62-L65" target="_blank">code to do so</a> 
+                                is easy.</li>
+                
+                            <li><a href="/Results05">Version 5</a> - People are lazy so this adds an autocompelte to the text box. This requires a slight 
+                                <a href="https://github.com/graboskyc/AtlasSearchLocalNYC2023/blob/main/Indexes/autocomplete.json" target="_blank">refinement</a> 
+                                to the index.</li>
+                
+                            <li><a href="/Results06">Version 6</a> - Now we are really showing off. This brings all the features together. We have autocompelte, 
+                            the search, highlighting, MoreLikeThis, sorting, and more. But now we added facets. We can keep using the same index as before, but instead 
+                            of issuing a <code>$search</code> aggregation, we can use a <code>$searchmeta</code> stage to get metadata. In this case, we are faceting (getting a list of) the 
+                            <code>genre</code>s and <code>cast</code> in the results, building that into a selectable list, and then can compound our search with any 
+                            that were selected. Lastly, we can use facets for another interesting use case by enhancing our recommendation engine to recommend other movies 
+                            with a specific cast member.</li>
+                
+                        </ul>
+                    </div>
+                </div>
+                <div class="parent">
+                    <div class="child">
+                            <img src="/BrandAssets/Illustrations/Technical_CONTENT_Presentation_Spot_BS_ForestGreen.png" style="width:50%" />
+                            <h2 style="text-align:center">Movie Search</h2>
+                            @Body
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="js/json-formatter.js"></script>
     <script>
         var errCt = 0;

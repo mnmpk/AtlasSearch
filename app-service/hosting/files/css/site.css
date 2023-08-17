@@ -46,3 +46,17 @@ a, .btn-link {
     border-color: var(--mdb-evergreen);
     border-width: 3px;
 }
+
+
+.parent {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    width: 100vw;
+    background: url(/BrandAssets/Wallpaper.png);
+    background-size: cover;
+}
+
+.child {
+  width: 50vw;
+}
