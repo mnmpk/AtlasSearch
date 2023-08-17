@@ -1,0 +1,232 @@
+{
+    "properties": {
+        "_id": {
+            "bsonType": "objectId"
+        },
+        "content": {
+            "bsonType": "string"
+        },
+        "data": {
+            "bsonType": "object",
+            "properties": {
+                "block_types": {
+                    "bsonType": "object",
+                    "properties": {
+                        "en": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hans": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hant": {
+                            "bsonType": "string"
+                        }
+                    }
+                },
+                "carpark_management": {
+                    "bsonType": "object",
+                    "properties": {
+                        "en": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hans": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hant": {
+                            "bsonType": "string"
+                        }
+                    }
+                },
+                "district_name": {
+                    "bsonType": "object",
+                    "properties": {
+                        "en": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hans": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hant": {
+                            "bsonType": "string"
+                        }
+                    }
+                },
+                "emac": {
+                    "bsonType": "object",
+                    "properties": {
+                        "en": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hans": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hant": {
+                            "bsonType": "string"
+                        }
+                    }
+                },
+                "estate_name": {
+                    "bsonType": "object",
+                    "properties": {
+                        "en": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hans": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hant": {
+                            "bsonType": "string"
+                        }
+                    }
+                },
+                "flat_size": {
+                    "bsonType": "object",
+                    "properties": {
+                        "en": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hans": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hant": {
+                            "bsonType": "string"
+                        }
+                    }
+                },
+                "name_of_blocks": {
+                    "bsonType": "object",
+                    "properties": {
+                        "en": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hans": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hant": {
+                            "bsonType": "string"
+                        }
+                    }
+                },
+                "name_of_rental_flats": {
+                    "bsonType": "object",
+                    "properties": {
+                        "en": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hans": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hant": {
+                            "bsonType": "string"
+                        }
+                    }
+                },
+                "num_of_blocks": {
+                    "bsonType": "string"
+                },
+                "other_infomation": {
+                    "bsonType": "object",
+                    "properties": {
+                        "en": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hans": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hant": {
+                            "bsonType": "string"
+                        }
+                    }
+                },
+                "property_management": {
+                    "bsonType": "object",
+                    "properties": {
+                        "en": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hans": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hant": {
+                            "bsonType": "string"
+                        }
+                    }
+                },
+                "region_name": {
+                    "bsonType": "object",
+                    "properties": {
+                        "en": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hans": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hant": {
+                            "bsonType": "string"
+                        }
+                    }
+                },
+                "tenancy_office": {
+                    "bsonType": "object",
+                    "properties": {
+                        "en": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hans": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hant": {
+                            "bsonType": "string"
+                        }
+                    }
+                },
+                "type": {
+                    "bsonType": "object",
+                    "properties": {
+                        "en": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hans": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hant": {
+                            "bsonType": "string"
+                        }
+                    }
+                },
+                "website": {
+                    "bsonType": "string"
+                },
+                "year_intake": {
+                    "bsonType": "object",
+                    "properties": {
+                        "en": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hans": {
+                            "bsonType": "string"
+                        },
+                        "zh-Hant": {
+                            "bsonType": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "location": {
+            "bsonType": "object",
+            "properties": {
+                "coordinates": {
+                    "bsonType": "array",
+                    "items": {
+                        "bsonType": "double"
+                    }
+                },
+                "type": {
+                    "bsonType": "string"
+                }
+            }
+        }
+    },
+    "title": "datum"
+}

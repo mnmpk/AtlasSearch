@@ -1,0 +1,31 @@
+[
+    {
+        "name": "search",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "myCustomResolver",
+        "private": false
+    },
+    {
+        "name": "user",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "stream",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "hotKeyword",
+        "private": false,
+        "disable_arg_logs": true
+    },
+    {
+        "name": "Function_0",
+        "private": false,
+        "disable_arg_logs": true
+    }
+]

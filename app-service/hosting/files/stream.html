@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Atlas Search</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <style>
+    .container {
+      margin-top: 20px;
+    }
+
+    .mb20 {
+      margin-bottom: 20px;
+    }
+
+    hgroup {
+      padding-left: 15px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    hgroup h1 {
+      font: 500 normal 1.625em "Roboto", Arial, Verdana, sans-serif;
+      color: #2a3644;
+      margin-top: 0;
+      line-height: 1.15;
+    }
+
+    hgroup h2.lead {
+      font: normal normal 1.125em "Roboto", Arial, Verdana, sans-serif;
+      color: #2a3644;
+      margin: 0;
+      padding-bottom: 10px;
+    }
+
+    .search-result .thumbnail {
+      /* border-radius: 0 !important; */
+      width: 15em;
+    }
+
+    .search-result:first-child {
+      margin-top: 0 !important;
+    }
+
+    .search-result {
+      margin-top: 20px;
+    }
+
+    .search-result .col-md-2 {
+      border-right: 1px dotted #ccc;
+      min-height: 140px;
+    }
+
+    .search-result ul {
+      padding-left: 0 !important;
+      list-style: none;
+    }
+
+    .search-result ul li {
+      font: 400 normal .85em "Roboto", Arial, Verdana, sans-serif;
+      line-height: 30px;
+    }
+
+    .search-result ul li i {
+      padding-right: 5px;
+    }
+
+    .search-result .col-md-7 {
+      position: relative;
+    }
+
+    .search-result h3 {
+      font: 500 normal 1.375em "Roboto", Arial, Verdana, sans-serif;
+      margin-top: 0 !important;
+      margin-bottom: 10px !important;
+    }
+
+    .search-result h3>a,
+    .search-result i {
+      color: #248dc1 !important;
+    }
+
+    .search-result p {
+      font: normal normal 1.125em "Roboto", Arial, Verdana, sans-serif;
+    }
+
+    .search-result span.plus {
+      position: absolute;
+      right: 0;
+      top: 126px;
+    }
+
+    .search-result span.plus a {
+      background-color: #248dc1;
+      padding: 5px 5px 3px 5px;
+    }
+
+    .search-result span.plus a:hover {
+      background-color: #414141;
+    }
+
+    .search-result span.plus a i {
+      color: #fff !important;
+    }
+
+    /* .search-result span.border {
+          display: block;
+          width: 97%;
+          margin: 0 15px;
+          border-bottom: 1px dotted #ccc;
+        } */
+
+    .search-result .meta-search li {
+      font-weight: 600;
+    }
+
+    .search-result .meta-search li>span {
+      font-weight: 100;
+    }
+
+    .highlight {
+      background-color: #a94442;
+      color: white;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    #button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 30px;
+      background-color: #eee;
+      border: solid #ccc 1px;
+      cursor: pointer;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      height: 100%;
+      display: none;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .cv-spinner {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px #ddd solid;
+      border-top: 4px #2e93e6 solid;
+      border-radius: 50%;
+      animation: sp-anime 0.8s infinite linear;
+    }
+
+    @keyframes sp-anime {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .is-hide {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="overlay">
+    <div class="cv-spinner">
+      <span class="spinner"></span>
+    </div>
+  </div>
+
+  <form onsubmit="return false;">
+  <div class="container">
+    <div class="row">
+      <div class="col-7">
+          <div class="mb-1">
+            <input type="radio" class="btn-check" name="region" id="regionTW" value="TW" autocomplete="off" checked onclick="getHotKeyword()">
+            <label class="btn btn-secondary" for="regionTW">TW</label>
+            <input type="radio" class="btn-check" name="region" id="regionHK" value="HK" autocomplete="off" onclick="getHotKeyword()">
+            <label class="btn btn-secondary" for="regionHK">HK</label>
+            <input type="radio" class="btn-check" name="region" id="regionUS" value="US" autocomplete="off" onclick="getHotKeyword()">
+            <label class="btn btn-secondary" for="regionUS">US</label>
+            <input type="radio" class="btn-check" name="region" id="regionJP" value="JP" autocomplete="off" onclick="getHotKeyword()">
+            <label class="btn btn-secondary" for="regionJP">JP</label>
+            <input type="radio" class="btn-check" name="region" id="regionCA" value="CA" autocomplete="off" onclick="getHotKeyword()">
+            <label class="btn btn-secondary" for="regionCA">CA</label>
+            <input type="radio" class="btn-check" name="region" id="regionID" value="ID" autocomplete="off" onclick="getHotKeyword()">
+            <label class="btn btn-secondary" for="regionID">ID</label>
+            <input type="radio" class="btn-check" name="region" id="regionGB" value="GB" autocomplete="off" onclick="getHotKeyword()">
+            <label class="btn btn-secondary" for="regionGB">GB</label>
+            <input type="radio" class="btn-check" name="region" id="regionMY" value="MY" autocomplete="off" onclick="getHotKeyword()">
+            <label class="btn btn-secondary" for="regionMY">MY</label>
+            <input type="radio" class="btn-check" name="region" id="regionIT" value="IT" autocomplete="off" onclick="getHotKeyword()">
+            <label class="btn btn-secondary" for="regionIT">IT</label>
+            <input type="radio" class="btn-check" name="region" id="regionTH" value="TH" autocomplete="off" onclick="getHotKeyword()">
+            <label class="btn btn-secondary" for="regionTH">TH</label>
+            <input type="radio" class="btn-check" name="region" id="regionSG" value="SG" autocomplete="off" onclick="getHotKeyword()">
+            <label class="btn btn-secondary" for="regionSG">SG</label>
+            <input type="radio" class="btn-check" name="region" id="regionAU" value="AU" autocomplete="off" onclick="getHotKeyword()">
+            <label class="btn btn-secondary" for="regionAU">AU</label>
+            <input type="radio" class="btn-check" name="region" id="regionCN" value="CN" autocomplete="off" onclick="getHotKeyword()">
+            <label class="btn btn-secondary" for="regionCN">CN</label>
+          </div>
+          <div class="mb-1 row">
+            <label for="search" class="form-label col-sm-2">Query</label>
+            <div class="col-sm-10"><input id="search" type="text" class="form-control" placeholder="search"></div>
+          </div>
+          <div class="mb-1" id="hot-keyword-placholder">           
+          </div>
+      </div>
+      <div class="col-5" id="search-facets-placholder">
+
+      </div>
+    <div class="mt-1">
+      <button class="btn btn-secondary" type="button" onclick="call()">Search</button>
+    </div>
+    </div>
+  </div>
+</form>
+  <div class="container">
+
+    <section class="col-md-12" id="search-results-placholder"></section>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://unpkg.com/realm-web/dist/bundle.iife.js"></script>
+
+
+  <script>
+    const userAPIKey = "0P0b3hjgzsIhnT0Pq30ffMwOSI6FFQGLCUjvi8dFZZS81AzN3MPLm0jkFw3V8CHX";
+    const app = new Realm.App({ id: "search-app-nthoe" });
+    let timer = null;
+    $(document).ready(function () {
+      init();
+    });
+
+    function init() {
+      login();
+      getHotKeyword();
+    }
+
+    async function login() {
+      try {
+        if (!app.currentUser) {
+          let credentials;
+          if (userAPIKey.length > 0) {
+            credentials = Realm.Credentials.apiKey(userAPIKey);
+          } else {
+            credentials = Realm.Credentials.anonymous();
+          }
+          await app.logIn(credentials);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    async function getHotKeyword(){
+      var region = $("input[name='region']:checked").val();
+      const hotKeywords = await app.currentUser.functions.hotKeyword({ "r": region });
+
+      var placholder = $('#hot-keyword-placholder');
+      placholder.empty();
+      $.each(hotKeywords, function (index, item) {
+        placholder.append(`<span class="badge rounded-pill bg-secondary" onclick="searchKeyword('${item.keyword}')">${item.keyword}</span>`);
+      });
+    }
+    async function searchKeyword(keyword) {
+      $('#search').val(keyword);
+      this.call();
+    }
+
+    async function call() {
+
+      var query = $('#search').val();
+      var region = $("input[name='region']:checked").val();
+      var beginTime = $("input[name='timeRange']:checked").val();
+      var ts = 0, te = 4070880000;
+      if(beginTime){
+        const beginTimes=beginTime.split("-");
+        ts=parseInt(beginTimes[0]);
+        te=parseInt(beginTimes[1]);
+      }
+      if (query) {
+        $("#overlay").fadeIn(300);
+        await app.currentUser.refreshCustomData();
+        let q = { "q": query, "r": region, "ts": ts, "te": te };
+        render(await app.currentUser.functions.stream(q));
+      }
+    }
+
+
+    function render(results) {
+      setTimeout(function () {
+        $("#overlay").fadeOut(300);
+      }, 500);
+      var placholder = $('#search-results-placholder');
+      placholder.empty();
+
+      let html = '';
+      $.each(results[0].docs, function (index, item) {
+        html += `
+        <hr/>
+        <article class="search-result row">
+          <div class="col-md-7">
+            <h3>${item.caption}</h3>
+            <p>${new Date(item.beginTime).toLocaleDateString()}</p>
+            <p>status: ${item.status}</p>
+            ${item.hashtags?hashtags(item.hashtags):""}
+            <p>region: ${item.region}</p>
+          </div>
+          <div class="col-md-5 excerpet">
+            ${item.highlights?highlight(item.highlights):""}
+            <p>Search score: ${item.score}</p>
+          </div>
+        </article>
+      `;
+      });
+      // place in html
+      placholder.append(html);
+
+
+      var facets = $('#search-facets-placholder');
+      facets.empty();
+      html = '<div><h2>Time:</h2>';
+      $.each(results[0].categorizedBybeginTime, function (index, item) {
+        html += `
+          <input type="radio" class="btn-check" name="timeRange" id="age${index}" value="${item._id.min}-${item._id.max}" autocomplete="off">
+          <label class="btn btn-secondary" for="age${index}">${new Date(item._id.min).toLocaleDateString()}-${new Date(item._id.max).toLocaleDateString()} (${item.count})</label>
+        `;
+      });
+      html += '</div>';
+      facets.append(html);
+    }
+    function hashtags(hashtags){
+      let txt = ``;
+      hashtags.forEach(function (hashtag) {
+        txt += '<span class="badge rounded-pill bg-primary">'+hashtag.text+'</span>';
+      });
+      return txt;
+    }
+    function highlight(highlights_arr) {
+      let txt = ``;
+      highlights_arr.forEach(function (highlight) {
+        if (highlight.path instanceof Object) {
+          txt += `<h3>matched path: ${highlight.path.value}, analyzer: ${highlight.path.multi}</h3><p>`;
+        } else {
+          txt += `<h3>matched path: ${highlight.path}</h3><p>`;
+        }
+        highlight.texts.forEach(function (item) {
+          if (item.type == 'hit') {
+            txt += `<b><span class="highlight"> ${item.value} </span></b>`;
+          }
+          else {
+            txt += item.value;
+          }
+        });
+      });
+      txt += `</p>`;
+      return txt
+    }
+
+  </script>
+
+</body>
+
+</html>

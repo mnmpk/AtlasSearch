@@ -1,0 +1,28 @@
+{
+    "field_name": "sumEstate",
+    "function_name": "myCustomResolver",
+    "input_type": {
+        "properties": {
+            "i": {
+                "bsonType": "number"
+            }
+        },
+        "title": "input",
+        "type": "object"
+    },
+    "input_type_format": "custom",
+    "on_type": "Datum",
+    "payload_type": {
+        "properties": {
+            "count": {
+                "bsonType": "number"
+            },
+            "test": {
+                "bsonType": "string"
+            }
+        },
+        "title": "test",
+        "type": "object"
+    },
+    "payload_type_format": "custom"
+}
