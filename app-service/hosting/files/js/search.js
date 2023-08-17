@@ -33,40 +33,40 @@ async function login() {
 
 async function call() {
     await app.currentUser.refreshCustomData();
-    let query = { "s": $("input[name='search']:checked").val(), "q": $('#search').val() };
+    let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val() };
     render(await app.currentUser.functions.local(query));
-/*
-    var letters = $('#search').val();
-    var collection = $('#collection').val();
-    var index = $('#index').val();
-    var operator = $('input[name="operator"]:checked').val();
-    var path = $('#path').val();
-    var k = $('#keyword').prop('checked');
-    var e = $('#english').prop('checked');
-    var c = $('#chinese').prop('checked');
-    var j = $('#japanese').prop('checked');
-    if ((e || c || j) && !path) {
-        alert("path cannot empty if using analyzer");
-        return;
-    }
-    var fuzzy = $('#fuzzy').val();
-    var limit = $('#limit').val();
-    var radius = $('#radius').val();
-    if ((letters) || $('#geo').prop('checked')) {
-        $("#overlay").fadeIn(300);
-        await app.currentUser.refreshCustomData();
-        let query = { "coll": collection, "i": index, "q": letters, "o": operator, "f": fuzzy, "l": limit, "k": k, "e": e, "c": c, "j": j };
-        if ($('#geo').prop('checked')) {
-            query.lat = circle.getCenter().lat();
-            query.lng = circle.getCenter().lng();
-            query.r = radius;
+    /*
+        var letters = $('#search').val();
+        var collection = $('#collection').val();
+        var index = $('#index').val();
+        var operator = $('input[name="operator"]:checked').val();
+        var path = $('#path').val();
+        var k = $('#keyword').prop('checked');
+        var e = $('#english').prop('checked');
+        var c = $('#chinese').prop('checked');
+        var j = $('#japanese').prop('checked');
+        if ((e || c || j) && !path) {
+            alert("path cannot empty if using analyzer");
+            return;
         }
-        if (path) {
-            query.p = path;
-        }
-
-        render(letters, await app.currentUser.functions.search(query));
-    }*/
+        var fuzzy = $('#fuzzy').val();
+        var limit = $('#limit').val();
+        var radius = $('#radius').val();
+        if ((letters) || $('#geo').prop('checked')) {
+            $("#overlay").fadeIn(300);
+            await app.currentUser.refreshCustomData();
+            let query = { "coll": collection, "i": index, "q": letters, "o": operator, "f": fuzzy, "l": limit, "k": k, "e": e, "c": c, "j": j };
+            if ($('#geo').prop('checked')) {
+                query.lat = circle.getCenter().lat();
+                query.lng = circle.getCenter().lng();
+                query.r = radius;
+            }
+            if (path) {
+                query.p = path;
+            }
+    
+            render(letters, await app.currentUser.functions.search(query));
+        }*/
 }
 
 
@@ -87,7 +87,7 @@ function render(results) {
             ${highlight(item)}
             
             <button class="btn btn-leafy btn-sm" @onclick="RunSearch">Find More Like This</button>
-            ${item.poster?`<img class="moviePoster" src="${item.poster}" width="50px" />`:""}
+            ${item.poster ? `<img class="moviePoster" src="${item.poster}" width="50px" />` : ""}
             <div class="moviePoster">${item.title}</div>
             <p>This is unique!</p>
 
@@ -142,7 +142,7 @@ function render(results) {
 
 function highlight(item) {
     let txt = ``;
-    if(item.highlights){
+    if (item.highlights) {
         item.highlights.forEach(function (highlight) {
             highlight.texts.forEach(function (item) {
                 if (item.type == 'hit') {
@@ -153,7 +153,7 @@ function highlight(item) {
                 }
             });
         });
-    }else{
+    } else {
         txt += `<p class="card-text">${item.Plot}</p>`;
     }
     /*highlights_arr.forEach(function (highlight) {
