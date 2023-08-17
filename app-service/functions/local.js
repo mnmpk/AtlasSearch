@@ -34,6 +34,21 @@ exports = function(query) {
           "_id": new BSON.ObjectId(q),
         },
       });
+    }else if(s=="2"){
+      agg_pipeline.push({
+        "$search": {
+          text: {
+            query: q,
+            path: ["title", "fullplot"]
+          },
+          sortBetaV1: {
+            year: -1,
+          },
+          highlight: {
+            path: ["fullplot", "title"],
+          }
+        }
+      });
     }
     agg_pipeline.push({
       $project:
