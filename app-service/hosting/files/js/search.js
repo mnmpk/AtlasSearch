@@ -70,7 +70,6 @@ async function call() {
 }
 
 async function mlt(e, item) {
-    console.log(item);
     const mlt = await app.currentUser.functions.local({ "c": "4", "t": item.title, "g":item.genres, "fp": item.fullplot })
     e.find(".mlt").empty();
     if(mlt.length){
