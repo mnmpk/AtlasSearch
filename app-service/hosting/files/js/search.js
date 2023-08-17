@@ -122,7 +122,7 @@ function highlight(item) {
     let txt = ``;
     if (item.highlights) {
         var hs = item.highlights.filter(h=>h.path=="fullplot");
-        if(hs){
+        if(hs.length){
             txt += `<p class="card-text">`;
             hs.forEach(function (highlight) {
                 highlight.texts.forEach(function (item) {
