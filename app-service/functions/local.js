@@ -30,7 +30,7 @@ exports = function(query) {
     const agg_pipeline = [
       {
         "$match": {
-          "_id": ObjectId(q),
+          "_id": new ObjectId(q),
         },
       },
     ];
