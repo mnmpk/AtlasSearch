@@ -83,23 +83,32 @@
                 <div>
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                         <input type="radio" class="btn-check" name="search" id="s1" value="1" autocomplete="off" checked>
-                        <label class="btn btn-outline-primary" for="s1">Search 1</label>
+                        <label class="btn btn-outline-primary" for="s1">ID query</label>
                         <input type="radio" class="btn-check" name="search" id="s2" value="2" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="s2">Search 2</label>
+                        <label class="btn btn-outline-primary" for="s2">Dynamic search</label>
                         <input type="radio" class="btn-check" name="search" id="s3" value="3" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="s3">Search 3</label>
-                        <input type="radio" class="btn-check" name="search" id="s4" value="4" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="s4">Search 4</label>
+                        <label class="btn btn-outline-primary" for="s3">Sort result</label>
+
                         <input type="radio" class="btn-check" name="search" id="s5" value="5" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="s5">Search 5</label>
+                        <label class="btn btn-outline-primary" for="s5">Auto compelte</label>
                         <input type="radio" class="btn-check" name="search" id="s6" value="6" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="s6">Search 6</label>
+                        <label class="btn btn-outline-primary" for="s6">Facets</label>
                         <input type="radio" class="btn-check" name="search" id="s7" value="7" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="s7">Search 7</label>
+                        <label class="btn btn-outline-primary" for="s7">Chinese search</label>
                       </div>
                 </div>
                 <div class="row">
                     <h1>Search Results</h1>
+                </div>
+
+
+                <div class="row">
+                    <div class="input-group input-group-lg">
+                        <input id="search" type="text" class="form-control" placeholder="Search Content...">
+                        <img src='/BrandAssets/Icons/Technical_ATLAS_Search10x.png' width="50" class="btn btn-search" />
+                    </div>
+                    <ul id="autocomplete" class="options">
+                    </ul>
                 </div>
 
                 <div class="row">
@@ -120,6 +129,18 @@
                                 <option value="@f.Key">@f.Key (@f.Count)</option>
                             </select>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Default checkbox
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                            <label class="form-check-label" for="flexCheckChecked">
+                              Checked checkbox
+                            </label>
+                          </div>
                     </div>
 
                     <div class="col-auto">
@@ -131,26 +152,6 @@
                         </div>
                     </div>
 
-                    <div class="col-auto">
-                        <button class="btn btn-lg btn-leafy">Search</button>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-group input-group-lg">
-                        <input id="search" type="text" class="form-control" placeholder="Search Content...">
-                        <img src='/BrandAssets/Icons/Technical_ATLAS_Search10x.png' width="50" class="btn btn-search" />
-                    </div>
-<!--
-                    <ul class="options">
-                        <li class="option input-group">
-                            <span class="option-text">@s.Title</span>
-                        </li>
-                        <li class="option input-group">
-                            See Full Results for "@SearchTerm"
-                        </li>
-                    </ul>
-                    -->
                 </div>
 
                 <div id="results" class="row" style="margin-top:20px;">

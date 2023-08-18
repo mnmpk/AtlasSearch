@@ -88,6 +88,29 @@ exports = function (query) {
       $limit:
         3,
     });
+  } else if (c == "5") {
+    agg_pipeline.push({
+      $search: {
+        index: "autocomplete",
+        compound: {
+          should: [{
+            autocomplete: {
+              query: q,
+              path: "title",
+            }
+          },{
+            autocomplete: {
+              query: q,
+              path: "fullplot",
+            }
+          }],
+        },
+      },
+    });
+    agg_pipeline.push({
+      $limit:
+        10,
+    });
   }
   agg_pipeline.push({
     $project:

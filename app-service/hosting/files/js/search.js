@@ -9,9 +9,14 @@ function init() {
     $('.btn-search').click(function () {
         call();
     });
+    $('#ddl').on('change', function () {
+        call();
+    });
     $('#search').keyup(function () {
-        clearTimeout(timer);
-        timer = setTimeout(call, 1000)
+        if($('#search').val().length>1){
+            clearTimeout(timer);
+            timer = setTimeout(autoComplete, 200);
+        }
     });
 }
 
@@ -29,6 +34,41 @@ async function login() {
     } catch (error) {
         console.error(error);
     }
+}
+async function autoComplete() {
+    await app.currentUser.refreshCustomData();
+    let query = { "c": 5, "q": $('#search').val(), "s": $("#ddl").val() };
+    renderAutoComplete(('#search').val(), await app.currentUser.functions.local(query));
+}
+
+function renderAutoComplete(query, results) {
+
+    var placholder = $('#autocomplete');
+    placholder.empty();
+
+    $.each(results, function (index, item) {
+        var e = $(`
+        <li class="option input-group">
+        <span class="option-text">${item.title}</span>
+    </li>`);
+    
+        e.find(".option").on("click",function(){
+            console.log(item);
+        });
+        placholder.append(e);
+    });
+
+    var e = $(`
+    <li class="option input-group">
+        See Full Results for "@SearchTerm"
+    </li>`);
+    e.find(".option").on("click",function(){
+        console.log(query);
+    });
+    placholder.append(e);
+    /*setTimeout(function () {
+        $("#overlay").fadeOut(300);
+    }, 500);*/
 }
 
 async function call() {
