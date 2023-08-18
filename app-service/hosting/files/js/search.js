@@ -38,7 +38,7 @@ async function login() {
 async function autoComplete() {
     await app.currentUser.refreshCustomData();
     let query = { "c": 5, "q": $('#search').val(), "s": $("#ddl").val() };
-    renderAutoComplete(('#search').val(), await app.currentUser.functions.local(query));
+    renderAutoComplete($('#search').val(), await app.currentUser.functions.local(query));
 }
 
 function renderAutoComplete(query, results) {
