@@ -168,6 +168,9 @@ ul {
     position: absolute;
     z-index: 500;
     margin-top: 4rem !important;
+    background: #FFF;
+    padding:5px;
+    border: 1px solid #CCC;
 }
 .card-title {
     color: var(--mdb-link) !important;

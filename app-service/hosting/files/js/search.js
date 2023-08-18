@@ -52,18 +52,22 @@ function renderAutoComplete(query, results) {
         <span class="option-text">${item.title}</span>
     </li>`);
     
-        e.find(".option").on("click",function(){
+        e.on("click",function(){
             console.log(item);
+            $('#search').val(item.title);
+            call();
         });
         placholder.append(e);
     });
 
     var e = $(`
     <li class="option input-group">
-        See Full Results for "@SearchTerm"
+        See Full Results for "${query}"
     </li>`);
-    e.find(".option").on("click",function(){
+    e.on("click",function(){
         console.log(query);
+        $('#search').val(query);
+        call();
     });
     placholder.append(e);
     /*setTimeout(function () {
