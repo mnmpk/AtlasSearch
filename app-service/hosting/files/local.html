@@ -82,7 +82,8 @@
                 </div-->
                 <div>
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                        <input type="radio" class="btn-check" name="search" id="s1" value="id" autocomplete="off" checked>
+                        <input type="radio" class="btn-check" name="search" id="s1" value="id" autocomplete="off"
+                            checked>
                         <label class="btn btn-primary" for="s1">ID query (573a1398f29313caabce912c)</label>
                         <input type="radio" class="btn-check" name="search" id="s2" value="dynamic" autocomplete="off">
                         <label class="btn btn-primary" for="s2">Dynamic search</label>
@@ -90,7 +91,7 @@
                         <label class="btn btn-primary" for="s3">More features</label>
                         <input type="radio" class="btn-check" name="search" id="s7" value="chi" autocomplete="off">
                         <label class="btn btn-primary" for="s7">Chinese search</label>
-                      </div>
+                    </div>
                 </div>
                 <div class="row">
                     <h1>Search Results</h1>
@@ -117,40 +118,44 @@
                         </div>
                     </div>
 
-                    <div id="facets" class="col-auto">
-                        <h2>Genres</h2>
-                        <div class="form-check">
-                            <select class="form-select" name="genres" id="genres" multiple>
-                                <option value="@f.Key">@f.Key (@f.Count)</option>
-                            </select>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                              Default checkbox
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                              Checked checkbox
-                            </label>
-                          </div>
-                    </div>
-
-                    <div class="col-auto">
-                        <h2>Cast</h2>
-                        <div class="form-check">
-                            <select class="form-select" name="cast" id="cast" multiple>
-                                <option value="@f.Key">@f.Key (@f.Count)</option>
-                            </select>
-                        </div>
-                    </div>
-
                 </div>
+                <div class="row">
+                    <div id="facets" class="col-3">
+                        <div>
+                            <h2>Genres</h2>
+                            <div class="form-check">
+                                <select class="form-select" name="genres" id="genres" multiple>
+                                    <option value="@f.Key">@f.Key (@f.Count)</option>
+                                </select>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Default checkbox
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    Checked checkbox
+                                </label>
+                            </div>
+                        </div>
 
-                <div id="results" class="row" style="margin-top:20px;">
-                    
+                        <div>
+                            <h2>Cast</h2>
+                            <div class="form-check">
+                                <select class="form-select" name="cast" id="cast" multiple>
+                                    <option value="@f.Key">@f.Key (@f.Count)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div id="results" class="row" style="margin-top:20px;">
+
+                        </div>
+                    </div>
                 </div>
 
             </div>
