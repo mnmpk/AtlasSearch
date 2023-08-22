@@ -96,7 +96,7 @@ function renderAutoComplete(query, results) {
 async function call() {
     $('#autocomplete').hide();
     await app.currentUser.refreshCustomData();
-    let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val(), "casts":$("input[name='casts']").val(),"genres":$("input[name='genres']").val() };
+    let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val(), "casts":$("input[name='casts']:checked").val(),"genres":$("input[name='genres']:checked").val() };
     render(await app.currentUser.functions.local(query));
     if(query.c=="final"){
         renderFacets(await app.currentUser.functions.local({ "c": "facets", "q": $('#search').val() }));
