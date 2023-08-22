@@ -97,75 +97,9 @@ async function call() {
     let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val(), "casts": $.map($('input[name="casts"]:checked'), function (c) { return c.value; }), "genres": $.map($('input[name="genres"]:checked'), function (c) { return c.value; }) };
     render(await app.currentUser.functions.local(query));
     if (query.c == "final") {
-        renderFacets(await app.currentUser.functions.local({ "c": "facets", "q": $('#search').val() }));
+        renderFacets($.map($('input[name="casts"]:checked'), $.map($('input[name="genres"]:checked'), await app.currentUser.functions.local({ "c": "facets", "q": $('#search').val() }));
     }
-    /*
-        var letters = $('#search').val();
-        var collection = $('#collection').val();
-        var index = $('#index').val();
-        var operator = $('input[name="operator"]:checked').val();
-        var path = $('#path').val();
-        var k = $('#keyword').prop('checked');
-        var e = $('#english').prop('checked');
-        var c = $('#chinese').prop('checked');
-        var j = $('#japanese').prop('checked');
-        if ((e || c || j) && !path) {
-            alert("path cannot empty if using analyzer");
-            return;
-        }
-        var fuzzy = $('#fuzzy').val();
-        var limit = $('#limit').val();
-        var radius = $('#radius').val();
-        if ((letters) || $('#geo').prop('checked')) {
-            $("#overlay").fadeIn(300);
-            await app.currentUser.refreshCustomData();
-            let query = { "coll": collection, "i": index, "q": letters, "o": operator, "f": fuzzy, "l": limit, "k": k, "e": e, "c": c, "j": j };
-            if ($('#geo').prop('checked')) {
-                query.lat = circle.getCenter().lat();
-                query.lng = circle.getCenter().lng();
-                query.r = radius;
-            }
-            if (path) {
-                query.p = path;
-            }
-    
-            render(letters, await app.currentUser.functions.search(query));
-        }*/
 }
-function renderFacets(results) {
-    var placholder = $('#facets');
-    placholder.empty();
-    let html=``;
-    for (const facet in results[0]) {
-        html+=`<div>
-        <h2>${facet}</h2>`;
-        $.each(results[0][facet], function (index, item) {
-            html+=`<div class="form-check">
-            <input class="form-check-input" type="checkbox" name="genres" value="${item._id}" id="${facet+index}">
-            <label class="form-check-label" for="${facet+index}">
-                ${item._id} (${item.count})
-            </label>
-        </div>`;
-            
-        });
-        html+=`</div>`;
-      }
-      placholder.append(html);
-}
-
-async function mlt(e, item) {
-    const mlt = await app.currentUser.functions.local({ "c": "mlt", "t": item.title, "g": item.genres, "fp": item.fullplot })
-    e.find(".mlt").empty();
-    if (mlt.length) {
-        $.each(mlt, function (index, i) {
-            e.find(".mlt").append(`<div class="col">${i.poster ? '<img class="img-fluid" src="' + i.poster + '" />' : ""}${i.title}</div>`);
-        });
-    } else {
-        e.find(".mlt").append(`<p>This is unique!</p>`);
-    }
-
-}
-
 
 function render(results) {
 
@@ -203,6 +137,41 @@ function render(results) {
         $("#overlay").fadeOut(300);
     }, 500);*/
 }
+
+function renderFacets(results) {
+    var placholder = $('#facets');
+    let html=``;
+    for (const facet in results[0]) {
+        html+=`<div>
+        <h2>${facet}</h2>`;
+        $.each(results[0][facet], function (index, item) {
+            html+=`<div class="form-check">
+            <input class="form-check-input" type="checkbox" name="genres" value="${item._id}" id="${facet+index}" ${$("#"+facet+index).prop('checked')?"checked":""}>
+            <label class="form-check-label" for="${facet+index}">
+                ${item._id} (${item.count})
+            </label>
+        </div>`;
+            
+        });
+        html+=`</div>`;
+      }
+      placholder.empty();
+      placholder.append(html);
+}
+
+async function mlt(e, item) {
+    const mlt = await app.currentUser.functions.local({ "c": "mlt", "t": item.title, "g": item.genres, "fp": item.fullplot })
+    e.find(".mlt").empty();
+    if (mlt.length) {
+        $.each(mlt, function (index, i) {
+            e.find(".mlt").append(`<div class="col">${i.poster ? '<img class="img-fluid" src="' + i.poster + '" />' : ""}${i.title}</div>`);
+        });
+    } else {
+        e.find(".mlt").append(`<p>This is unique!</p>`);
+    }
+
+}
+
 
 function highlight(item) {
     let txt = ``;

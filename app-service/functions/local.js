@@ -48,7 +48,7 @@ exports = function (query) {
     });
   } else if (c == "final") {
     let filters = [];
-    if(casts && casts.length){
+    if (casts && casts.length) {
       filters.push({
         text: {
           query: casts,
@@ -56,7 +56,7 @@ exports = function (query) {
         }
       });
     }
-    if(genres && genres.length){
+    if (genres && genres.length) {
       filters.push({
         text: {
           query: genres,
@@ -65,28 +65,28 @@ exports = function (query) {
       });
     }
     var search = {
-      $search: {
-        index: "facets",
-        compound: {
-          filter: filters,
-          must: [{
-            text: {
-              query: q,
-              path: ["title","fullplot"],
-            }
-          }],
-        },
-        highlight: {
-          path: ["fullplot", "title"],
-        }
+      index: "facets",
+      compound: {
+        filter: filters,
+        must: [{
+          text: {
+            query: q,
+            path: ["title", "fullplot"],
+          }
+        }],
       },
+      highlight: {
+        path: ["fullplot", "title"],
+      }
     };
-    if (s=="Release Year") {
+    if (s == "Release Year") {
       search["sortBetaV1"] = {
         year: -1,
       };
     }
-    agg_pipeline.push(search);
+    agg_pipeline.push({
+      $search: search
+    });
   } else if (c == "mlt") {
     agg_pipeline.push({
       $search: {
@@ -120,7 +120,7 @@ exports = function (query) {
               query: q,
               path: "title",
             }
-          },{
+          }, {
             autocomplete: {
               query: q,
               path: "fullplot",
@@ -155,8 +155,8 @@ exports = function (query) {
       25,
   });
 
-  if(c == "facets"){
-    agg_pipeline=[
+  if (c == "facets") {
+    agg_pipeline = [
       {
         $searchMeta: {
           index: "facets",
@@ -182,12 +182,12 @@ exports = function (query) {
       },
       {
         $project:
-          {
-            Genres:
-              "$facet.genresFacet.buckets",
-            Casts:
-              "$facet.castFacet.buckets",
-          },
+        {
+          Genres:
+            "$facet.genresFacet.buckets",
+          Casts:
+            "$facet.castFacet.buckets",
+        },
       },
     ];
   }
