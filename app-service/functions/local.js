@@ -4,7 +4,7 @@ exports = function (query) {
   // Data can be extracted from the request as follows:
 
   // Query params, e.g. '?arg1=hello&arg2=world' => {arg1: "hello", arg2: "world"}
-  const { c, q, s, t, g, fp } = query;
+  const { c, q, s, t, g, fp, casts, genres } = query;
 
   // Headers, e.g. {"Content-Type": ["application/json"]}
   //const contentTypes = headers["Content-Type"];
