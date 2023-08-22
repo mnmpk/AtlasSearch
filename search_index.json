@@ -1,6 +1,6 @@
 {
-  "analyzer": "lucene.keyword",
-  "searchAnalyzer": "lucene.keyword",
+  "analyzer": "cantoneseAnalyzer",
+  "searchAnalyzer": "cantoneseAnalyzer",
   "mappings": {
     "dynamic": false,
     "fields": {
@@ -12,11 +12,25 @@
             "type": "string"
           },
           "zh-cn": {
+            "multi": {
+              "canton": {
+                "analyzer": "cantoneseAnalyzer",
+                "searchAnalyzer": "cantoneseAnalyzer",
+                "type": "string"
+              }
+            },
             "analyzer": "lucene.chinese",
             "searchAnalyzer": "lucene.chinese",
             "type": "string"
           },
           "zh-hk": {
+            "multi": {
+              "canton": {
+                "analyzer": "cantoneseAnalyzer",
+                "searchAnalyzer": "cantoneseAnalyzer",
+                "type": "string"
+              }
+            },
             "analyzer": "lucene.chinese",
             "searchAnalyzer": "lucene.chinese",
             "type": "string"
@@ -32,11 +46,25 @@
             "type": "string"
           },
           "zh-cn": {
+            "multi": {
+              "canton": {
+                "analyzer": "cantoneseAnalyzer",
+                "searchAnalyzer": "cantoneseAnalyzer",
+                "type": "string"
+              }
+            },
             "analyzer": "lucene.chinese",
             "searchAnalyzer": "lucene.chinese",
             "type": "string"
           },
           "zh-hk": {
+            "multi": {
+              "canton": {
+                "analyzer": "cantoneseAnalyzer",
+                "searchAnalyzer": "cantoneseAnalyzer",
+                "type": "string"
+              }
+            },
             "analyzer": "lucene.chinese",
             "searchAnalyzer": "lucene.chinese",
             "type": "string"
@@ -56,8 +84,8 @@
         "fields": {
           "en": [
             {
-              "analyzer": "lucene.keyword",
-              "searchAnalyzer": "lucene.keyword",
+              "analyzer": "cantoneseAnalyzer",
+              "searchAnalyzer": "cantoneseAnalyzer",
               "type": "string"
             },
             {
@@ -66,8 +94,8 @@
           ],
           "zh-cn": [
             {
-              "analyzer": "lucene.keyword",
-              "searchAnalyzer": "lucene.keyword",
+              "analyzer": "cantoneseAnalyzer",
+              "searchAnalyzer": "cantoneseAnalyzer",
               "type": "string"
             },
             {
@@ -76,8 +104,8 @@
           ],
           "zh-hk": [
             {
-              "analyzer": "lucene.keyword",
-              "searchAnalyzer": "lucene.keyword",
+              "analyzer": "cantoneseAnalyzer",
+              "searchAnalyzer": "cantoneseAnalyzer",
               "type": "string"
             },
             {
@@ -99,22 +127,26 @@
           },
           "zh-cn": {
             "multi": {
-              "keyword": {
-                "analyzer": "lucene.keyword",
-                "searchAnalyzer": "lucene.keyword",
+              "canton": {
+                "analyzer": "cantoneseAnalyzer",
+                "searchAnalyzer": "cantoneseAnalyzer",
                 "type": "string"
               }
             },
+            "analyzer": "lucene.chinese",
+            "searchAnalyzer": "lucene.chinese",
             "type": "string"
           },
           "zh-hk": {
             "multi": {
-              "keyword": {
-                "analyzer": "lucene.keyword",
-                "searchAnalyzer": "lucene.keyword",
+              "canton": {
+                "analyzer": "cantoneseAnalyzer",
+                "searchAnalyzer": "cantoneseAnalyzer",
                 "type": "string"
               }
             },
+            "analyzer": "lucene.chinese",
+            "searchAnalyzer": "lucene.chinese",
             "type": "string"
           }
         },
@@ -129,5 +161,74 @@
         }
       ]
     }
-  }
+  },
+  "analyzers": [
+    {
+      "charFilters": [{
+        "mappings": {
+          "1": "一",
+          "2": "二",
+          "3": "三",
+          "4": "四",
+          "5": "五",
+          "6": "六",
+          "7": "七",
+          "8": "八",
+          "9": "九",
+          "0": "零",
+          "I": "一",
+          "II": "二",
+          "III": "三",
+          "IV": "四",
+          "V": "五",
+          "VI": "六",
+          "VII": "七",
+          "VIII": "八",
+          "IX": "九",
+          "X": "十",
+          "a":"A",
+          "b":"B",
+          "c":"C",
+          "d":"D",
+          "e":"E",
+          "f":"F",
+          "g":"G",
+          "h":"H",
+          "i":"I",
+          "j":"J",
+          "k":"K",
+          "l":"L",
+          "m":"M",
+          "n":"N",
+          "o":"O",
+          "p":"P",
+          "q":"Q",
+          "r":"R",
+          "s":"S",
+          "t":"T",
+          "u":"U",
+          "v":"V",
+          "w":"W",
+          "x":"X",
+          "y":"Y",
+          "z":"Z",
+          ".":"",
+          "‧":"",
+          "-":"",
+          "_":"",
+          "(":"",
+          ")":"",
+          "（":"",
+          "）":"",
+          " ":""
+        },
+        "type": "mapping"
+      }],
+      "name": "cantoneseAnalyzer",
+      "tokenFilters": [],
+      "tokenizer": {
+        "type": "keyword"
+      }
+    }
+  ]
 }

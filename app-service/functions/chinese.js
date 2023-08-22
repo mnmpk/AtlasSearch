@@ -137,10 +137,40 @@ exports = function (query) {
     var search = {
       compound: {
         filter: filters,
-        must: [{
+        should: [{
           text: {
             query: q,
-            path: ["name.en", "merits.en","name.zh-hk", "merits.zh-hk","name.zh-cn", "merits.zh-cn"],
+            path: [
+              {
+                value: "name.zh-hk",
+                multi: "canton",
+              },
+              {
+                value: "name.zh-cn",
+                multi: "canton",
+              },
+              {
+                value: "merits.zh-hk",
+                multi: "canton",
+              },
+              {
+                value: "merits.zh-cn",
+                multi: "canton",
+              },
+              {
+                value: "address.zh-hk",
+                multi: "canton",
+              },
+              {
+                value: "address.zh-cn",
+                multi: "canton",
+              },
+            ],
+          },
+        },{
+          text: {
+            query: q,
+            path: ["name.en", "merits.en", "address.en", "name.zh-hk", "merits.zh-hk", "address.zh-hk","name.zh-cn", "merits.zh-cn", "address.zh-cn"],
           }
         }],
       },
