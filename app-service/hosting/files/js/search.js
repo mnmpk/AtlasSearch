@@ -25,7 +25,7 @@ function init() {
 
         }else if(this.value=="dynamic"){
 
-        }else if(this.value=="sort"){
+        }else if(this.value=="final"){
             sort.show();
             $('#search').on("keyup", function () {
                 if($('#search').val().length>1){
@@ -33,8 +33,6 @@ function init() {
                     timer = setTimeout(autoComplete, 200);
                 }
             });
-        }else if(this.value=="facet"){
-
         }else if(this.value=="chi"){
 
         }

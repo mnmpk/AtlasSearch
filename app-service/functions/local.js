@@ -46,29 +46,51 @@ exports = function (query) {
         }
       }
     });
-  } else if (c == "sort") {
+  } else if (c == "final") {
+    let filters = [];
+    if(casts){
+      filters.push({
+        text: {
+          query: casts,
+          path: "cast",
+        }
+      });
+    }
+    if(genres){
+      filters.push({
+        text: {
+          query: genres,
+          path: "genres",
+        }
+      });
+    }
     var search = {
-      index: "sort",
-      text: {
-        query: q,
-        path: ["title", "fullplot"]
+      $search: {
+        index: "facets",
+        compound: {
+          filter: filters,
+          must: [{
+            text: {
+              query: q,
+              path: ["title","fullplot"],
+            }
+          }],
+        },
+        highlight: {
+          path: ["fullplot", "title"],
+        }
       },
-      highlight: {
-        path: ["fullplot", "title"],
-      }
     };
     if (s=="Release Year") {
       search["sortBetaV1"] = {
         year: -1,
       };
     }
-    agg_pipeline.push({
-      "$search": search
-    });
+    agg_pipeline.push(search);
   } else if (c == "mlt") {
     agg_pipeline.push({
       $search: {
-        index: "sort",
+        index: "facets",
         moreLikeThis: {
           like: [
             {
