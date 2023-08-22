@@ -48,7 +48,7 @@ exports = function (query) {
     });
   } else if (c == "final") {
     let filters = [];
-    if(casts){
+    if(casts && casts.length){
       filters.push({
         text: {
           query: casts,
@@ -56,7 +56,7 @@ exports = function (query) {
         }
       });
     }
-    if(genres){
+    if(genres && genres.length){
       filters.push({
         text: {
           query: genres,
@@ -183,9 +183,9 @@ exports = function (query) {
       {
         $project:
           {
-            genresFacetBuckets:
+            Genres:
               "$facet.genresFacet.buckets",
-            castFacetBuckets:
+            Casts:
               "$facet.castFacet.buckets",
           },
       },

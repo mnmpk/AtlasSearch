@@ -84,7 +84,7 @@
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                         <input type="radio" class="btn-check" name="search" id="s1" value="id" autocomplete="off"
                             checked>
-                        <label class="btn btn-primary" for="s1">ID query (573a1398f29313caabce912c)</label>
+                        <label class="btn btn-primary" for="s1">ID query</label>
                         <input type="radio" class="btn-check" name="search" id="s2" value="dynamic" autocomplete="off">
                         <label class="btn btn-primary" for="s2">Dynamic search</label>
                         <input type="radio" class="btn-check" name="search" id="s3" value="final" autocomplete="off">
@@ -100,13 +100,12 @@
 
                 <div class="row">
                     <div class="input-group input-group-lg">
-                        <input id="search" type="text" class="form-control" placeholder="Search Content...">
+                        <input id="search" type="text" class="form-control" placeholder="Search Content..." value="573a1398f29313caabce912c">
                         <img src='/BrandAssets/Icons/Technical_ATLAS_Search10x.png' width="50" class="btn btn-search" />
                     </div>
                     <ul id="autocomplete" class="options">
                     </ul>
                 </div>
-
                 <div class="row">
                     <div id="sort" class="col-auto">
                         <h2><label for="ddl" class="form-label">Sort By</label></h2>
@@ -117,44 +116,10 @@
                             </select>
                         </div>
                     </div>
-
-                </div>
-                <div class="row">
                     <div id="facets" class="col-3">
-                        <div>
-                            <h2>Genres</h2>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="genres" value="g1" id="g1">
-                                <label class="form-check-label" for="g1">
-                                    G1 checkbox
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="genres" value="g2" id="g2">
-                                <label class="form-check-label" for="g2">
-                                    G2 checkbox
-                                </label>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h2>Cast</h2>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="casts" value="c1" id="c1">
-                                <label class="form-check-label" for="c1">
-                                    C1 checkbox
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="casts" value="c2" id="c2">
-                                <label class="form-check-label" for="c2">
-                                    C2 checkbox
-                                </label>
-                            </div>
-                        </div>
                     </div>
-                    <div class="col-auto">
-                        <div id="results" class="row" style="margin-top:20px;">
+                    <div class="col-9">
+                        <div id="results" class="row">
 
                         </div>
                     </div>

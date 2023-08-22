@@ -133,8 +133,24 @@ async function call() {
         }*/
 }
 function renderFacets(results) {
-    var placholder = $('#autocomplete');
-    console.log(results);
+    var placholder = $('#facets');
+    placholder.empty();
+    let html=``;
+    for (const facet in results[0]) {
+        html+=`<div>
+        <h2>${facet}</h2>`;
+        $.each(results[0][facet], function (index, item) {
+            html+=`<div class="form-check">
+            <input class="form-check-input" type="checkbox" name="genres" value="${item._id}" id="${facet+index}">
+            <label class="form-check-label" for="${facet+index}">
+                ${item._id} (${item.count})
+            </label>
+        </div>`;
+            
+        });
+        html+=`</div>`;
+      }
+      placholder.append(html);
 }
 
 async function mlt(e, item) {
