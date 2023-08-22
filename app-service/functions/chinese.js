@@ -29,41 +29,49 @@ exports = function (query) {
 
   let agg_pipeline = [];
   if (c == "mlt") {
+    let like = [];
+    if(n){
+      like.push({
+        "name.en": n.en,
+      });
+      like.push({
+        "name.zh-hk": n["zh-hk"],
+      });
+      like.push({
+        "name.zh-cn": n["zh-cn"],
+      });
+    }
+    if(m){
+      like.push({
+        "merits.en": m.en,
+      });
+      like.push({
+        "merits.zh-hk": m["zh-hk"],
+      });
+      like.push({
+        "merits.zh-cn": m["zh-cn"],
+      });
+    }
+    if(d){
+      like.push({
+        "district.en": d.en,
+      });
+      like.push({
+        "district.zh-hk": d["zh-hk"],
+      });
+      like.push({
+        "district.zh-cn": d["zh-cn"],
+      });
+    }
+    if(t){
+      like.push({
+        bldg_types: t,
+      });
+    }
     agg_pipeline.push({
       $search: {
         moreLikeThis: {
-          like: [
-            {
-              "name.en": n.en,
-            },
-            {
-              "name.zh-hk": n["zh-hk"],
-            },
-            {
-              "name.zh-cn": n["zh-cn"],
-            },
-            {
-              bldg_types: t,
-            },
-            {
-              "merits.en": m.en,
-            },
-            {
-              "merits.zh-hk": m["zh-hk"],
-            },
-            {
-              "merits.zh-cn": m["zh-cn"],
-            },
-            {
-              "district.en": d.en,
-            },
-            {
-              "district.zh-hk": d["zh-hk"]
-            },
-            {
-              "district.zh-cn": d["zh-cn"],
-            },
-          ],
+          like: like
         },
       },
     });
