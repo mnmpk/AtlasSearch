@@ -21,22 +21,21 @@ function init() {
         facets.hide();
         $('#search').off();
 
-        if(this.value=="1"){
+        if(this.value=="id"){
 
-        }else if(this.value=="2"){
+        }else if(this.value=="dynamic"){
 
-        }else if(this.value=="3"){
+        }else if(this.value=="sort"){
             sort.show();
-        }else if(this.value=="4"){
             $('#search').on("keyup", function () {
                 if($('#search').val().length>1){
                     clearTimeout(timer);
                     timer = setTimeout(autoComplete, 200);
                 }
             });
-        }else if(this.value=="5"){
+        }else if(this.value=="facet"){
 
-        }else if(this.value=="6"){
+        }else if(this.value=="chi"){
 
         }
     });
@@ -59,7 +58,7 @@ async function login() {
 }
 async function autoComplete() {
     await app.currentUser.refreshCustomData();
-    let query = { "c": 5, "q": $('#search').val(), "s": $("#ddl").val() };
+    let query = { "c": "autocomplete", "q": $('#search').val(), "s": $("#ddl").val() };
     renderAutoComplete($('#search').val(), await app.currentUser.functions.local(query));
 }
 
@@ -76,7 +75,6 @@ function renderAutoComplete(query, results) {
         e.on("click",function(){
             $('#search').val(item.title);
             call();
-            placholder.hide();
         });
         placholder.append(e);
     });
@@ -89,7 +87,6 @@ function renderAutoComplete(query, results) {
         console.log(query);
         $('#search').val(query);
         call();
-        placholder.hide();
     });
     placholder.append(e);
     placholder.show();
@@ -99,6 +96,7 @@ function renderAutoComplete(query, results) {
 }
 
 async function call() {
+    $('#autocomplete').hide();
     await app.currentUser.refreshCustomData();
     let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val() };
     render(await app.currentUser.functions.local(query));
@@ -137,7 +135,7 @@ async function call() {
 }
 
 async function mlt(e, item) {
-    const mlt = await app.currentUser.functions.local({ "c": "4", "t": item.title, "g":item.genres, "fp": item.fullplot })
+    const mlt = await app.currentUser.functions.local({ "c": "mlt", "t": item.title, "g":item.genres, "fp": item.fullplot })
     e.find(".mlt").empty();
     if(mlt.length){
         $.each(mlt, function (index, i) {
@@ -160,7 +158,7 @@ function render(results) {
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">${item.title} (${item.year})</h5>
-                <img class="img-fluid" src="${item.poster}" />
+                ${item.poster?'<img class="img-fluid" src="'+item.poster+'" />':""}
                 ${highlight(item)}
                 
                 <div class="mlt row">

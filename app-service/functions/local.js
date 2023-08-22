@@ -28,13 +28,13 @@ exports = function (query) {
   // const result = context.functions.execute("function_name", arg1, arg2);
 
   let agg_pipeline = [];
-  if (c == "1") {
+  if (c == "id") {
     agg_pipeline.push({
       "$match": {
         "_id": new BSON.ObjectId(q),
       },
     });
-  } else if (c == "2") {
+  } else if (c == "dynamic") {
     agg_pipeline.push({
       "$search": {
         text: {
@@ -46,7 +46,7 @@ exports = function (query) {
         }
       }
     });
-  } else if (c == "3") {
+  } else if (c == "sort") {
     var search = {
       index: "sort",
       text: {
@@ -65,7 +65,7 @@ exports = function (query) {
     agg_pipeline.push({
       "$search": search
     });
-  } else if (c == "4") {
+  } else if (c == "mlt") {
     agg_pipeline.push({
       $search: {
         index: "sort",
@@ -88,7 +88,7 @@ exports = function (query) {
       $limit:
         3,
     });
-  } else if (c == "5") {
+  } else if (c == "autocomplete") {
     agg_pipeline.push({
       $search: {
         index: "autocomplete",
