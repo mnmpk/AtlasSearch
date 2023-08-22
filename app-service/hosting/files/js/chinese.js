@@ -92,6 +92,11 @@ function render(results) {
                 <h5 class="card-title">${item.name["zh-hk"]} - ${item.name.en}</h5>
                 ${item.photo ? '<img class="img-fluid" src="' + item.photo + '" />' : ""}
                 ${highlight(item)}
+
+                ${item.address["zh-hk"]} (${item.address.en}), ${item.district["zh-hk"]} (${item.district.en})
+                ${item.op_date}
+                ${item.bldg_types.join(", ")}
+
                 
                 <div class="mlt row">
                     <button class="btn btn-leafy btn-sm">Find More Like This</button>
@@ -172,11 +177,11 @@ function highlight(item) {
             });
             txt += `</p>`;
         } else {
-            txt += `<p class="card-text">${item.merits.zh-hk}</p>`;
+            txt += `<p class="card-text">${item.merits["zh-hk"]}</p>`;
             txt += `<p class="card-text">${item.merits.en}</p>`;
         }
     } else {
-        txt += `<p class="card-text">${item.merits.zh-hk}</p>`;
+        txt += `<p class="card-text">${item.merits["zh-hk"]}</p>`;
         txt += `<p class="card-text">${item.merits.en}</p>`;
     }
     return txt;

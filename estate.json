@@ -20,6 +20,7 @@
       op_date: "$doc.first_op_date",
       bldg_types: "$doc.bldg_types",
       merits: "$doc.merits",
+      photo: "$doc.photo.path",
       location: {
         type: "Point",
         coordinates: [
