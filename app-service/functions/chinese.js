@@ -175,7 +175,7 @@ exports = function (query) {
         }],
       },
       highlight: {
-        path: ["name.en", "merits.en","name.zh-hk", "merits.zh-hk","name.zh-cn", "merits.zh-cn"],
+        path: ["name.en", "merits.en", "address.en", "name.zh-hk", "merits.zh-hk", "address.zh-hk","name.zh-cn", "merits.zh-cn", "address.zh-cn"],
       }
     };
     if (s == "Opening Year") {
