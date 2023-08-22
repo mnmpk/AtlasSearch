@@ -98,6 +98,9 @@ async function call() {
     await app.currentUser.refreshCustomData();
     let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val() };
     render(await app.currentUser.functions.local(query));
+    if(query.c=="final"){
+        renderFacets(await app.currentUser.functions.local({ "c": "facets", "q": $('#search').val() }));
+    }
     /*
         var letters = $('#search').val();
         var collection = $('#collection').val();
@@ -130,6 +133,9 @@ async function call() {
     
             render(letters, await app.currentUser.functions.search(query));
         }*/
+}
+function renderFacets(results) {
+    console.log(results);
 }
 
 async function mlt(e, item) {

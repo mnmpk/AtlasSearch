@@ -131,7 +131,7 @@ exports = function (query) {
     });
     agg_pipeline.push({
       $limit:
-        10,
+        5,
     });
   }
   agg_pipeline.push({
@@ -150,6 +150,47 @@ exports = function (query) {
       },
     },
   });
+  agg_pipeline.push({
+    $limit:
+      25,
+  });
+
+  if(c == "facets"){
+    agg_pipeline=[
+      {
+        $searchMeta: {
+          index: "facets",
+          facet: {
+            operator: {
+              text: {
+                path: ["fullplot", "title"],
+                query: q,
+              },
+            },
+            facets: {
+              genresFacet: {
+                type: "string",
+                path: "genres",
+              },
+              castFacet: {
+                type: "string",
+                path: "cast",
+              },
+            },
+          },
+        },
+      },
+      {
+        $project:
+          {
+            genresFacetBuckets:
+              "$facet.genresFacet.buckets",
+            castFacetBuckets:
+              "$facet.castFacet.buckets",
+          },
+      },
+    ];
+  }
   const results = context.services.get("mongodb-atlas").db("sample_mflix").collection("movies").aggregate(agg_pipeline);
   return results;
 };
