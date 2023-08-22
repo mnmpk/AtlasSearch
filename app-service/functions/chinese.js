@@ -148,9 +148,9 @@ exports = function (query) {
         path: ["name.en", "merits.en","name.zh-hk", "merits.zh-hk","name.zh-cn", "merits.zh-cn"],
       }
     };
-    if (s == "Release Year") {
+    if (s == "Opening Year") {
       search["sortBetaV1"] = {
-        year: -1,
+        op_date: -1,
       };
     }
     agg_pipeline.push({

@@ -44,20 +44,46 @@
         },
         "type": "document"
       },
-      "bldg_types": {
-        "type": "stringFacet"
-      },
+      "bldg_types": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "stringFacet"
+        }
+      ],
       "district": {
         "fields": {
-          "en": {
-            "type": "stringFacet"
-          },
-          "zh-cn": {
-            "type": "stringFacet"
-          },
-          "zh-hk": {
-            "type": "stringFacet"
-          }
+          "en": [
+            {
+              "analyzer": "lucene.keyword",
+              "searchAnalyzer": "lucene.keyword",
+              "type": "string"
+            },
+            {
+              "type": "stringFacet"
+            }
+          ],
+          "zh-cn": [
+            {
+              "analyzer": "lucene.keyword",
+              "searchAnalyzer": "lucene.keyword",
+              "type": "string"
+            },
+            {
+              "type": "stringFacet"
+            }
+          ],
+          "zh-hk": [
+            {
+              "analyzer": "lucene.keyword",
+              "searchAnalyzer": "lucene.keyword",
+              "type": "string"
+            },
+            {
+              "type": "stringFacet"
+            }
+          ]
         },
         "type": "document"
       },
