@@ -94,7 +94,7 @@ exports = function (query) {
               query: q,
               path: "name.zh-hk",
             }
-          } {
+          }, {
             autocomplete: {
               query: q,
               path: "name.zh-cn",
