@@ -132,7 +132,7 @@ function render(results) {
         });
         placholder.append(e);
     });
-    if($("input[name='search']:checked").val()=="final"){
+    if ($("input[name='search']:checked").val() == "final") {
         $('#facets').show();
         $('#sort').show();
     }
@@ -143,23 +143,27 @@ function render(results) {
 
 function renderFacets(results) {
     var placholder = $('#facets');
-    let html=``;
+    let html = ``;
     for (const facet in results[0]) {
-        html+=`<div>
+        html += `<div>
         <h2>${facet}</h2>`;
         $.each(results[0][facet], function (index, item) {
-            html+=`<div class="form-check">
-            <input class="form-check-input" type="checkbox" name="${facet}" value="${item._id}" id="${facet+index}" ${$("#"+facet+index).prop('checked')?"checked":""}>
-            <label class="form-check-label" for="${facet+index}">
+            html += `<div class="form-check">
+            <input class="form-check-input" type="checkbox" name="${facet}" value="${item._id}" id="${facet + index}" ${$("#" + facet + index).prop('checked') ? "checked" : ""}>
+            <label class="form-check-label" for="${facet + index}">
                 ${item._id} (${item.count})
             </label>
         </div>`;
-            
+
         });
-        html+=`</div>`;
-      }
-      placholder.empty();
-      placholder.append(html);
+        html += `</div>`;
+    }
+    placholder.empty();
+    placholder.append(html);
+
+    placholder.find("input").on("change", function () {
+        call();
+    });
 }
 
 async function mlt(e, item) {
