@@ -14,6 +14,7 @@ function init() {
         call();
     });
     $("input[name='search']").on('change', function () {
+        $('#search').val("");
         var autocomplete = $('#autocomplete');
         var sort = $('#sort');
         var facets = $('#facets');
