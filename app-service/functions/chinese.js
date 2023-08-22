@@ -195,6 +195,7 @@ exports = function (query) {
             path: ["name.en", "merits.en", "address.en", "name.zh-hk", "merits.zh-hk", "address.zh-hk","name.zh-cn", "merits.zh-cn", "address.zh-cn"],
           }
         }],
+        minimumShouldMatch:1,
       },
       highlight: {
         path: ["name.en", "merits.en", "address.en", "name.zh-hk", "merits.zh-hk", "address.zh-hk","name.zh-cn", "merits.zh-cn", "address.zh-cn"],
