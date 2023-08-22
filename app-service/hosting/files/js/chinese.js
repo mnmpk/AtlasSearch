@@ -38,7 +38,7 @@ async function login() {
 /*async function autoComplete() {
     await app.currentUser.refreshCustomData();
     let query = { "c": "autocomplete", "q": $('#search').val(), "s": $("#ddl").val() };
-    renderAutoComplete($('#search').val(), await app.currentUser.functions.local(query));
+    renderAutoComplete($('#search').val(), await app.currentUser.functions.chinese(query));
 }
 
 function renderAutoComplete(query, results) {
@@ -74,9 +74,9 @@ async function call() {
     $('#autocomplete').hide();
     await app.currentUser.refreshCustomData();
     let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val(), "types": $.map($('input[name="Types"]:checked'), function (c) { return c.value; }), "district": $.map($('input[name="District"]:checked'), function (c) { return c.value; }) };
-    render(await app.currentUser.functions.local(query));
+    render(await app.currentUser.functions.chinese(query));
     if (query.c == "final") {
-        renderFacets(await app.currentUser.functions.local({ "c": "facets", "q": $('#search').val() }));
+        renderFacets(await app.currentUser.functions.chinese({ "c": "facets", "q": $('#search').val() }));
     }
 }
 
@@ -141,7 +141,7 @@ function renderFacets(results) {
 }
 
 async function mlt(e, item) {
-    const mlt = await app.currentUser.functions.local({ "c": "mlt", "n": item.name, "t": item.bldg_types, "m": item.merits })
+    const mlt = await app.currentUser.functions.chinese({ "c": "mlt", "n": item.name, "t": item.bldg_types, "m": item.merits })
     e.find(".mlt").empty();
     if (mlt.length) {
         $.each(mlt, function (index, i) {
