@@ -5,6 +5,7 @@ const app = new Realm.App({ id: "search-app-nthoe" });
 let timer = null;
 
 function init() {
+    $('#sort').hide();
     login();
     $('.btn-search').click(function () {
         call();
