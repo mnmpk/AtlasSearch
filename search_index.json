@@ -49,19 +49,14 @@
       },
       "district": {
         "fields": {
-          "name": {
-            "fields": {
-              "en": {
-                "type": "stringFacet"
-              },
-              "zh-cn": {
-                "type": "stringFacet"
-              },
-              "zh-hk": {
-                "type": "stringFacet"
-              }
-            },
-            "type": "document"
+          "en": {
+            "type": "stringFacet"
+          },
+          "zh-cn": {
+            "type": "stringFacet"
+          },
+          "zh-hk": {
+            "type": "stringFacet"
           }
         },
         "type": "document"

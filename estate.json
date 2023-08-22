@@ -16,7 +16,7 @@
     $project: {
       name: "$doc.name",
       address: "$doc.address",
-      district: "$doc.district",
+      district: "$doc.district.name",
       op_date: "$doc.first_op_date",
       bldg_types: "$doc.bldg_types",
       merits: "$doc.merits",
@@ -33,8 +33,6 @@
   {
     $project: {
       _id: 0,
-      "district.id": 0,
-      "district.neighborhood_district": 0,
     },
   },
   {

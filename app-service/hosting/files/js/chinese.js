@@ -95,7 +95,7 @@ function render(results) {
 
                 <p class="card-text">${item.address?item.address["zh-hk"]+"("+item.address.en+")":""}</p>
                 <p class="card-text">${item.district?item.district["zh-hk"]+"("+item.district.en+")":""}</p>
-                <p class="card-text">${item.op_date?item.op_date:""}</p>
+                <p class="card-text">${item.op_date?item.op_date.toLocaleDateString():""}</p>
                 <p class="card-text">${item.bldg_types?item.bldg_types.join(", "):""}</p>
 
                 
