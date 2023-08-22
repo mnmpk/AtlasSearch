@@ -4,7 +4,7 @@ exports = function (query) {
   // Data can be extracted from the request as follows:
 
   // Query params, e.g. '?arg1=hello&arg2=world' => {arg1: "hello", arg2: "world"}
-  const { c, q, s, n, t, m, types, districts } = query;
+  const { c, q, s, n, t, m, d, types, districts } = query;
 
   // Headers, e.g. {"Content-Type": ["application/json"]}
   //const contentTypes = headers["Content-Type"];
@@ -31,17 +31,37 @@ exports = function (query) {
   if (c == "mlt") {
     agg_pipeline.push({
       $search: {
-        index: "final",
         moreLikeThis: {
           like: [
             {
-              title: t,
+              "name.en": n.en,
             },
             {
-              genres: g,
+              "name.zh-hk": n["zh-hk"],
             },
             {
-              fullPlot: fp,
+              "name.zh-cn": n["zh-cn"],
+            },
+            {
+              bldg_types: t,
+            },
+            {
+              "merits.en": m.en,
+            },
+            {
+              "merits.zh-hk": m["zh-hk"],
+            },
+            {
+              "merits.zh-cn": m["zh-cn"],
+            },
+            {
+              "district.en": d.en,
+            },
+            {
+              "district.zh-hk": d["zh-hk"]
+            },
+            {
+              "district.zh-cn": d["zh-cn"],
             },
           ],
         },

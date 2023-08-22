@@ -90,11 +90,11 @@ function render(results) {
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">${item.name["zh-hk"]} - ${item.name.en}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${item.district?item.district["zh-hk"]+"("+item.district.en+")":""}</h6>
                 ${item.photo ? '<img class="img-fluid" src="' + item.photo + '" />' : ""}
                 ${highlight(item)}
 
                 <p class="card-text">${item.address?item.address["zh-hk"]+"("+item.address.en+")":""}</p>
-                <p class="card-text">${item.district?item.district["zh-hk"]+"("+item.district.en+")":""}</p>
                 <p class="card-text">${item.op_date?item.op_date.toLocaleDateString():""}</p>
                 <p class="card-text">${item.bldg_types?item.bldg_types.join(", "):""}</p>
 
@@ -147,7 +147,7 @@ function renderFacets(results) {
 }
 
 async function mlt(e, item) {
-    const mlt = await app.currentUser.functions.chinese({ "c": "mlt", "n": item.name, "t": item.bldg_types, "m": item.merits })
+    const mlt = await app.currentUser.functions.chinese({ "c": "mlt", "n": item.name, "t": item.bldg_types, "m": item.merits, "d": item.district })
     e.find(".mlt").empty();
     if (mlt.length) {
         $.each(mlt, function (index, i) {
