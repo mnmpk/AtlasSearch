@@ -42,7 +42,6 @@ async function autoComplete() {
 }
 
 function renderAutoComplete(query, results) {
-
     var placholder = $('#autocomplete');
     placholder.empty();
 
@@ -53,9 +52,9 @@ function renderAutoComplete(query, results) {
     </li>`);
     
         e.on("click",function(){
-            console.log(item);
             $('#search').val(item.title);
             call();
+            placholder.hide();
         });
         placholder.append(e);
     });
@@ -68,8 +67,10 @@ function renderAutoComplete(query, results) {
         console.log(query);
         $('#search').val(query);
         call();
+        placholder.hide();
     });
     placholder.append(e);
+    placholder.show();
     /*setTimeout(function () {
         $("#overlay").fadeOut(300);
     }, 500);*/
