@@ -65,7 +65,7 @@ exports = function (query) {
       });
     }
     var search = {
-      index: "facets",
+      index: "final",
       compound: {
         filter: filters,
         must: [{
@@ -90,7 +90,7 @@ exports = function (query) {
   } else if (c == "mlt") {
     agg_pipeline.push({
       $search: {
-        index: "facets",
+        index: "final",
         moreLikeThis: {
           like: [
             {
@@ -159,7 +159,7 @@ exports = function (query) {
     agg_pipeline = [
       {
         $searchMeta: {
-          index: "facets",
+          index: "final",
           facet: {
             operator: {
               text: {
