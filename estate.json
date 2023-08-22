@@ -1,0 +1,42 @@
+[
+  {
+    $unwind: {
+      path: "$photo",
+    },
+  },
+  {
+    $group: {
+      _id: "$id",
+      doc: {
+        $first: "$$ROOT",
+      },
+    },
+  },
+  {
+    $project: {
+      name: "$doc.name",
+      address: "$doc.address",
+      district: "$doc.district",
+      op_date: "$doc.first_op_date",
+      bldg_types: "$doc.bldg_types",
+      merits: "$doc.merits",
+      location: {
+        type: "Point",
+        coordinates: [
+          "$doc.longitude",
+          "$doc.latitude",
+        ],
+      },
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+      "district.id": 0,
+      "district.neighborhood_district": 0,
+    },
+  },
+  {
+    $out: "es",
+  },
+]

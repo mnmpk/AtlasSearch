@@ -5,7 +5,6 @@ const app = new Realm.App({ id: "search-app-nthoe" });
 let timer = null;
 
 function init() {
-    $('#sort').hide();
     login();
     $('.btn-search').click(function () {
         call();
@@ -13,27 +12,11 @@ function init() {
     $('#ddl').on('change', function () {
         call();
     });
-    $("input[name='search']").on('change', function () {
-        var search = $('#search');
-        var autocomplete = $('#autocomplete');
-        var sort = $('#sort');
-        var facets = $('#facets');
-        autocomplete.hide();
-        sort.hide();
-        facets.empty();
-        facets.hide();
-        search.val("");
-        search.off();
-        $('#results').empty();
-
-        if (this.value == "final") {
-            $('#search').on("keyup", function () {
-                if ($('#search').val().length > 1) {
-                    clearTimeout(timer);
-                    timer = setTimeout(autoComplete, 200);
-                }
-            });
-        }
+    $('#search').on("keyup", function () {
+        /*if ($('#search').val().length > 1) {
+            clearTimeout(timer);
+            timer = setTimeout(autoComplete, 200);
+        }*/
     });
 }
 
@@ -52,7 +35,7 @@ async function login() {
         console.error(error);
     }
 }
-async function autoComplete() {
+/*async function autoComplete() {
     await app.currentUser.refreshCustomData();
     let query = { "c": "autocomplete", "q": $('#search').val(), "s": $("#ddl").val() };
     renderAutoComplete($('#search').val(), await app.currentUser.functions.local(query));
@@ -85,15 +68,12 @@ function renderAutoComplete(query, results) {
     });
     placholder.append(e);
     placholder.show();
-    /*setTimeout(function () {
-        $("#overlay").fadeOut(300);
-    }, 500);*/
-}
+}*/
 
 async function call() {
     $('#autocomplete').hide();
     await app.currentUser.refreshCustomData();
-    let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val(), "casts": $.map($('input[name="Casts"]:checked'), function (c) { return c.value; }), "genres": $.map($('input[name="Genres"]:checked'), function (c) { return c.value; }) };
+    let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val(), "types": $.map($('input[name="Types"]:checked'), function (c) { return c.value; }), "district": $.map($('input[name="District"]:checked'), function (c) { return c.value; }) };
     render(await app.currentUser.functions.local(query));
     if (query.c == "final") {
         renderFacets(await app.currentUser.functions.local({ "c": "facets", "q": $('#search').val() }));
@@ -109,8 +89,8 @@ function render(results) {
         var e = $(`
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">${item.title} (${item.year})</h5>
-                ${item.poster ? '<img class="img-fluid" src="' + item.poster + '" />' : ""}
+                <h5 class="card-title">${item.name["zh-hk"]} - ${item.name.en}</h5>
+                ${item.photo ? '<img class="img-fluid" src="' + item.photo + '" />' : ""}
                 ${highlight(item)}
                 
                 <div class="mlt row">
@@ -130,10 +110,6 @@ function render(results) {
         });
         placholder.append(e);
     });
-    if ($("input[name='search']:checked").val() == "final") {
-        $('#facets').show();
-        $('#sort').show();
-    }
     /*setTimeout(function () {
         $("#overlay").fadeOut(300);
     }, 500);*/
@@ -165,11 +141,11 @@ function renderFacets(results) {
 }
 
 async function mlt(e, item) {
-    const mlt = await app.currentUser.functions.local({ "c": "mlt", "t": item.title, "g": item.genres, "fp": item.fullplot })
+    const mlt = await app.currentUser.functions.local({ "c": "mlt", "n": item.name, "t": item.bldg_types, "m": item.merits })
     e.find(".mlt").empty();
     if (mlt.length) {
         $.each(mlt, function (index, i) {
-            e.find(".mlt").append(`<div class="col">${i.poster ? '<img class="img-fluid" src="' + i.poster + '" />' : ""}${i.title}</div>`);
+            e.find(".mlt").append(`<div class="col">${i.photo ? '<img class="img-fluid" src="' + i.photo + '" />' : ""}${i.name["zh-hk"]}</div>`);
         });
     } else {
         e.find(".mlt").append(`<p>This is unique!</p>`);

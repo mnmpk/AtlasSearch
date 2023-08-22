@@ -4,7 +4,7 @@ exports = function (query) {
   // Data can be extracted from the request as follows:
 
   // Query params, e.g. '?arg1=hello&arg2=world' => {arg1: "hello", arg2: "world"}
-  const { c, q, s, t, g, fp, casts, genres } = query;
+  const { c, q, s, n, t, m, types, district } = query;
 
   // Headers, e.g. {"Content-Type": ["application/json"]}
   //const contentTypes = headers["Content-Type"];
@@ -28,66 +28,7 @@ exports = function (query) {
   // const result = context.functions.execute("function_name", arg1, arg2);
 
   let agg_pipeline = [];
-  if (c == "id") {
-    agg_pipeline.push({
-      "$match": {
-        "_id": new BSON.ObjectId(q),
-      },
-    });
-  } else if (c == "dynamic") {
-    agg_pipeline.push({
-      "$search": {
-        text: {
-          query: q,
-          path: ["title", "fullplot"]
-        },
-        highlight: {
-          path: ["fullplot", "title"],
-        }
-      }
-    });
-  } else if (c == "final") {
-    let filters = [];
-    if (casts && casts.length) {
-      filters.push({
-        text: {
-          query: casts,
-          path: "cast",
-        }
-      });
-    }
-    if (genres && genres.length) {
-      filters.push({
-        text: {
-          query: genres,
-          path: "genres",
-        }
-      });
-    }
-    var search = {
-      index: "final",
-      compound: {
-        filter: filters,
-        must: [{
-          text: {
-            query: q,
-            path: ["title", "fullplot"],
-          }
-        }],
-      },
-      highlight: {
-        path: ["fullplot", "title"],
-      }
-    };
-    if (s == "Release Year") {
-      search["sortBetaV1"] = {
-        year: -1,
-      };
-    }
-    agg_pipeline.push({
-      $search: search
-    });
-  } else if (c == "mlt") {
+  if (c == "mlt") {
     agg_pipeline.push({
       $search: {
         index: "final",
@@ -133,15 +74,70 @@ exports = function (query) {
       $limit:
         5,
     });
+  }else{
+    let filters = [];
+    if (types && types.length) {
+      filters.push({
+        text: {
+          query: types,
+          path: "bldg_types",
+        }
+      });
+    }
+    if (district) {
+      filters.push({
+        compound:{
+          should:[{
+            text: {
+              query: district,
+              path: "district.en",
+            }
+          },{
+            text: {
+              query: district,
+              path: "district.zh-hk",
+            }
+          },{
+            text: {
+              query: district,
+              path: "district.zh-cn",
+            }
+          }]
+        }
+      });
+    }
+    var search = {
+      compound: {
+        filter: filters,
+        must: [{
+          text: {
+            query: q,
+            path: ["name.en", "merits.en","name.zh-hk", "merits.zh-hk","name.zh-cn", "merits.zh-cn"],
+          }
+        }],
+      },
+      highlight: {
+        path: ["name.en", "merits.en","name.zh-hk", "merits.zh-hk","name.zh-cn", "merits.zh-cn"],
+      }
+    };
+    if (s == "Release Year") {
+      search["sortBetaV1"] = {
+        year: -1,
+      };
+    }
+    agg_pipeline.push({
+      $search: search
+    });
   }
   agg_pipeline.push({
     $project:
     {
-      title: 1,
-      fullplot: 1,
-      year: 1,
-      genres: 1,
-      poster: 1,
+      name: 1,
+      address: 1,
+      merits: 1,
+      op_date: 1,
+      bldg_types: 1,
+      district: 1,
       score: {
         $meta: "searchScore",
       },
@@ -159,22 +155,21 @@ exports = function (query) {
     agg_pipeline = [
       {
         $searchMeta: {
-          index: "final",
           facet: {
             operator: {
               text: {
-                path: ["fullplot", "title"],
+                path: ["name.en", "merits.en","name.zh-hk", "merits.zh-hk","name.zh-cn", "merits.zh-cn"],
                 query: q,
               },
             },
             facets: {
-              genresFacet: {
+              typesFacet: {
                 type: "string",
-                path: "genres",
+                path: "bldg_types",
               },
-              castFacet: {
+              districtFacet: {
                 type: "string",
-                path: "cast",
+                path: "district.zh-hk",
               },
             },
           },
@@ -183,14 +178,15 @@ exports = function (query) {
       {
         $project:
         {
-          Genres:
-            "$facet.genresFacet.buckets",
-          Casts:
-            "$facet.castFacet.buckets",
+          Types:
+            "$facet.typesFacet.buckets",
+          District:
+            "$facet.districtFacet.buckets",
         },
       },
     ];
   }
-  const results = context.services.get("mongodb-atlas").db("sample_mflix").collection("movies").aggregate(agg_pipeline);
+  console.log(JSON.stringify( agg_pipeline ));
+  const results = context.services.get("mongodb-atlas").db("search").collection("estate").aggregate(agg_pipeline);
   return results;
 };
