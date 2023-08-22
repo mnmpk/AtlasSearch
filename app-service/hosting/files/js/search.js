@@ -21,18 +21,18 @@ function init() {
         facets.hide();
         $('#search').off();
 
-        if(this.value=="id"){
+        if (this.value == "id") {
 
-        }else if(this.value=="dynamic"){
+        } else if (this.value == "dynamic") {
 
-        }else if(this.value=="final"){
+        } else if (this.value == "final") {
             $('#search').on("keyup", function () {
-                if($('#search').val().length>1){
+                if ($('#search').val().length > 1) {
                     clearTimeout(timer);
                     timer = setTimeout(autoComplete, 200);
                 }
             });
-        }else if(this.value=="chi"){
+        } else if (this.value == "chi") {
 
         }
     });
@@ -68,8 +68,8 @@ function renderAutoComplete(query, results) {
         <li class="option input-group">
         <span class="option-text">${item.title}</span>
     </li>`);
-    
-        e.on("click",function(){
+
+        e.on("click", function () {
             $('#search').val(item.title);
             call();
         });
@@ -80,7 +80,7 @@ function renderAutoComplete(query, results) {
     <li class="option input-group">
         See Full Results for "${query}"
     </li>`);
-    e.on("click",function(){
+    e.on("click", function () {
         $('#search').val(query);
         call();
     });
@@ -94,9 +94,9 @@ function renderAutoComplete(query, results) {
 async function call() {
     $('#autocomplete').hide();
     await app.currentUser.refreshCustomData();
-    let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val(), "casts":$("input[name='casts']:checked").val(),"genres":$("input[name='genres']:checked").val() };
+    let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val(), "casts": $.map($('input[name="casts"]:checked'), function (c) { return c.value; }), "genres": $.map($('input[name="genres"]:checked'), function (c) { return c.value; }) };
     render(await app.currentUser.functions.local(query));
-    if(query.c=="final"){
+    if (query.c == "final") {
         renderFacets(await app.currentUser.functions.local({ "c": "facets", "q": $('#search').val() }));
     }
     /*
@@ -138,16 +138,16 @@ function renderFacets(results) {
 }
 
 async function mlt(e, item) {
-    const mlt = await app.currentUser.functions.local({ "c": "mlt", "t": item.title, "g":item.genres, "fp": item.fullplot })
+    const mlt = await app.currentUser.functions.local({ "c": "mlt", "t": item.title, "g": item.genres, "fp": item.fullplot })
     e.find(".mlt").empty();
-    if(mlt.length){
+    if (mlt.length) {
         $.each(mlt, function (index, i) {
-            e.find(".mlt").append(`<div class="col">${i.poster?'<img class="img-fluid" src="'+i.poster+'" />':""}${i.title}</div>`);
+            e.find(".mlt").append(`<div class="col">${i.poster ? '<img class="img-fluid" src="' + i.poster + '" />' : ""}${i.title}</div>`);
         });
-    }else{
+    } else {
         e.find(".mlt").append(`<p>This is unique!</p>`);
     }
-    
+
 }
 
 
@@ -161,7 +161,7 @@ function render(results) {
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">${item.title} (${item.year})</h5>
-                ${item.poster?'<img class="img-fluid" src="'+item.poster+'" />':""}
+                ${item.poster ? '<img class="img-fluid" src="' + item.poster + '" />' : ""}
                 ${highlight(item)}
                 
                 <div class="mlt row">
@@ -176,7 +176,7 @@ function render(results) {
 
             </div>
         </div>`);
-        e.find(".mlt button").on("click",function(){
+        e.find(".mlt button").on("click", function () {
             mlt(e, item);
         });
         placholder.append(e);
@@ -191,8 +191,8 @@ function render(results) {
 function highlight(item) {
     let txt = ``;
     if (item.highlights) {
-        var hs = item.highlights.filter(h=>h.path=="fullplot");
-        if(hs.length){
+        var hs = item.highlights.filter(h => h.path == "fullplot");
+        if (hs.length) {
             txt += `<p class="card-text">`;
             hs.forEach(function (highlight) {
                 highlight.texts.forEach(function (item) {
@@ -207,7 +207,7 @@ function highlight(item) {
             txt += `</p>`;
         } else {
             txt += `<p class="card-text">${item.fullplot}</p>`;
-        }  
+        }
     } else {
         txt += `<p class="card-text">${item.fullplot}</p>`;
     }

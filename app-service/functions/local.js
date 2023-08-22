@@ -191,6 +191,7 @@ exports = function (query) {
       },
     ];
   }
+  console.log(agg_pipeline);
   const results = context.services.get("mongodb-atlas").db("sample_mflix").collection("movies").aggregate(agg_pipeline);
   return results;
 };
