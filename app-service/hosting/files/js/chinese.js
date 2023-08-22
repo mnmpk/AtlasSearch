@@ -157,7 +157,7 @@ async function mlt(e, item) {
 function highlight(item) {
     let txt = ``;
     if (item.highlights) {
-        var hs = item.highlights.filter(h => h.path == "fullplot");
+        var hs = item.highlights.filter(h => h.path == "merits.en"||h.path == "merits.zh-hk"||h.path == "merits.zh-cn");
         if (hs.length) {
             txt += `<p class="card-text">`;
             hs.forEach(function (highlight) {
@@ -172,10 +172,12 @@ function highlight(item) {
             });
             txt += `</p>`;
         } else {
-            txt += `<p class="card-text">${item.fullplot}</p>`;
+            txt += `<p class="card-text">${item.merits.zh-hk}</p>`;
+            txt += `<p class="card-text">${item.merits.en}</p>`;
         }
     } else {
-        txt += `<p class="card-text">${item.fullplot}</p>`;
+        txt += `<p class="card-text">${item.merits.zh-hk}</p>`;
+        txt += `<p class="card-text">${item.merits.en}</p>`;
     }
     return txt;
 }
