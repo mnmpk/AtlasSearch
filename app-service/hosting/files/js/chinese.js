@@ -73,7 +73,7 @@ function renderAutoComplete(query, results) {
 async function call() {
     $('#autocomplete').hide();
     await app.currentUser.refreshCustomData();
-    let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val(), "types": $.map($('input[name="Types"]:checked'), function (c) { return c.value; }), "district": $.map($('input[name="District"]:checked'), function (c) { return c.value; }) };
+    let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val(), "types": $.map($('input[name="Types"]:checked'), function (c) { return c.value; }), "districts": $.map($('input[name="Districts"]:checked'), function (c) { return c.value; }) };
     render(await app.currentUser.functions.chinese(query));
     if (query.c == "final") {
         renderFacets(await app.currentUser.functions.chinese({ "c": "facets", "q": $('#search').val() }));
