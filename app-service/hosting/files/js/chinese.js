@@ -91,7 +91,8 @@ function render(results) {
                 <h6 class="card-subtitle mb-2 text-muted">${item.district?item.district["zh-hk"]+"("+item.district.en+")":""}</h6>
                 ${item.photo ? '<img class="img-fluid" src="' + item.photo + '" />' : ""}
                 ${highlight(item)}
-
+                
+                Description:
                 <p class="card-text">${item.merits?item.merits["zh-hk"]+"("+item.merits.en+")":""}</p>
                 <p class="card-text">${item.address?item.address["zh-hk"]+"("+item.address.en+")":""}</p>
                 <p class="card-text">${item.op_date?item.op_date.toLocaleDateString():""}</p>
