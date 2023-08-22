@@ -14,15 +14,17 @@ function init() {
         call();
     });
     $("input[name='search']").on('change', function () {
-        $('#search').val("");
-        $('#results').empty();
+        var search = $('#search');
         var autocomplete = $('#autocomplete');
         var sort = $('#sort');
         var facets = $('#facets');
         autocomplete.hide();
         sort.hide();
+        facets.empty();
         facets.hide();
-        $('#search').off();
+        search.val("");
+        search.off();
+        $('#results').empty();
 
         if (this.value == "id") {
 
