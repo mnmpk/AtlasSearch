@@ -166,6 +166,7 @@ exports = function (query) {
                 multi: "canton",
               },
             ],
+            score:{boost:{value:3}},
             allowAnalyzedField:true
           },
         },{
