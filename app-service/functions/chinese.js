@@ -138,8 +138,8 @@ exports = function (query) {
       compound: {
         filter: filters,
         should: [{
-          text: {
-            query: q,
+          wildcard: {
+            query: "*"+q+"*",
             path: [
               {
                 value: "name.zh-hk",
@@ -166,6 +166,7 @@ exports = function (query) {
                 multi: "canton",
               },
             ],
+            allowAnalyzedField:true
           },
         },{
           text: {
