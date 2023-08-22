@@ -26,19 +26,13 @@ function init() {
         search.off();
         $('#results').empty();
 
-        if (this.value == "id") {
-
-        } else if (this.value == "dynamic") {
-
-        } else if (this.value == "final") {
+        if (this.value == "final") {
             $('#search').on("keyup", function () {
                 if ($('#search').val().length > 1) {
                     clearTimeout(timer);
                     timer = setTimeout(autoComplete, 200);
                 }
             });
-        } else if (this.value == "chi") {
-
         }
     });
 }
