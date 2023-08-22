@@ -117,17 +117,17 @@ exports = function (query) {
         compound:{
           should:[{
             text: {
-              query: district,
+              query: districts,
               path: "district.en",
             }
           },{
             text: {
-              query: district,
+              query: districts,
               path: "district.zh-hk",
             }
           },{
             text: {
-              query: district,
+              query: districts,
               path: "district.zh-cn",
             }
           }]
