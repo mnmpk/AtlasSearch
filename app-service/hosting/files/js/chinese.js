@@ -162,8 +162,8 @@ async function mlt(e, item) {
 function highlight(item) {
     let txt = `Matched:`;
     if (item.highlights) {
-        var hs = item.highlights.filter(h => h.path == "merits.en"||h.path == "merits.zh-hk"||h.path == "merits.zh-cn"||
-        h.path == "address.en"||h.path == "address.zh-hk"||h.path == "address.zh-cn");
+        var hs = item.highlights.filter(h => h.path == "merits.en"||h.path == "merits.zh-hk"||
+        h.path == "address.en"||h.path == "address.zh-hk");
         if (hs.length) {
             txt += `<p class="card-text">`;
             hs.forEach(function (highlight) {
