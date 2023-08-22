@@ -131,8 +131,10 @@ function render(results) {
         });
         placholder.append(e);
     });
-    $('#facets').show();
-    $('#sort').show();
+    if($("input[name='search']:checked").val()=="final"){
+        $('#facets').show();
+        $('#sort').show();
+    }
     /*setTimeout(function () {
         $("#overlay").fadeOut(300);
     }, 500);*/
