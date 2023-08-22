@@ -98,7 +98,7 @@ async function call() {
     let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val(), "casts": $.map($('input[name="casts"]:checked'), function (c) { return c.value; }), "genres": $.map($('input[name="genres"]:checked'), function (c) { return c.value; }) };
     render(await app.currentUser.functions.local(query));
     if (query.c == "final") {
-        renderFacets($.map($('input[name="casts"]:checked')), $.map($('input[name="genres"]:checked')), await app.currentUser.functions.local({ "c": "facets", "q": $('#search').val() }));
+        renderFacets(await app.currentUser.functions.local({ "c": "facets", "q": $('#search').val() }));
     }
 }
 
