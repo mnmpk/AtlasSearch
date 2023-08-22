@@ -176,11 +176,11 @@ function highlight(item) {
                 });
             });
             txt += `</p>`;
-        } else {
+        } else if(item.merits) {
             txt += `<p class="card-text">${item.merits["zh-hk"]}</p>`;
             txt += `<p class="card-text">${item.merits.en}</p>`;
         }
-    } else {
+    } else if(item.merits) {
         txt += `<p class="card-text">${item.merits["zh-hk"]}</p>`;
         txt += `<p class="card-text">${item.merits.en}</p>`;
     }
