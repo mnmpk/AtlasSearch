@@ -71,7 +71,7 @@ exports = function (query) {
       $limit:
         3,
     });
-  } else if (c == "autocomplete") {
+  }/*else if (c == "autocomplete") {
     agg_pipeline.push({
       $search: {
         index: "autocomplete",
@@ -94,7 +94,7 @@ exports = function (query) {
       $limit:
         5,
     });
-  }else{
+  }*/ else{
     let filters = [];
     if (types && types.length) {
       filters.push({
