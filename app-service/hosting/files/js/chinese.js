@@ -92,6 +92,7 @@ function render(results) {
                 ${item.photo ? '<img class="img-fluid" src="' + item.photo + '" />' : ""}
                 ${highlight(item)}
 
+                <p class="card-text">${item.merits?item.merits["zh-hk"]+"("+item.merits.en+")":""}</p>
                 <p class="card-text">${item.address?item.address["zh-hk"]+"("+item.address.en+")":""}</p>
                 <p class="card-text">${item.op_date?item.op_date.toLocaleDateString():""}</p>
                 <p class="card-text">${item.bldg_types?item.bldg_types.join(", "):""}</p>
@@ -159,9 +160,10 @@ async function mlt(e, item) {
 
 
 function highlight(item) {
-    let txt = ``;
+    let txt = `Matched:`;
     if (item.highlights) {
-        var hs = item.highlights.filter(h => h.path == "merits.en"||h.path == "merits.zh-hk"||h.path == "merits.zh-cn");
+        var hs = item.highlights.filter(h => h.path == "merits.en"||h.path == "merits.zh-hk"||h.path == "merits.zh-cn"||
+        h.path == "address.en"||h.path == "address.zh-hk"||h.path == "address.zh-cn");
         if (hs.length) {
             txt += `<p class="card-text">`;
             hs.forEach(function (highlight) {
@@ -175,13 +177,7 @@ function highlight(item) {
                 });
             });
             txt += `</p>`;
-        } else if(item.merits) {
-            txt += `<p class="card-text">${item.merits["zh-hk"]}</p>`;
-            txt += `<p class="card-text">${item.merits.en}</p>`;
-        }
-    } else if(item.merits) {
-        txt += `<p class="card-text">${item.merits["zh-hk"]}</p>`;
-        txt += `<p class="card-text">${item.merits.en}</p>`;
-    }
+        } 
+    } 
     return txt;
 }
