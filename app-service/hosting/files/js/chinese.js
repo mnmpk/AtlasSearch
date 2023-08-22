@@ -48,11 +48,11 @@ function renderAutoComplete(query, results) {
     $.each(results, function (index, item) {
         var e = $(`
         <li class="option input-group">
-        <span class="option-text">${item.name}</span>
+        <span class="option-text">${item.name["zh-hk"]}</span>
     </li>`);
 
         e.on("click", function () {
-            $('#search').val(item.name);
+            $('#search').val(item.name["zh-hk"]);
             call();
         });
         placholder.append(e);
