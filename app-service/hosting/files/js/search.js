@@ -26,7 +26,6 @@ function init() {
         }else if(this.value=="dynamic"){
 
         }else if(this.value=="final"){
-            sort.show();
             $('#search').on("keyup", function () {
                 if($('#search').val().length>1){
                     clearTimeout(timer);
@@ -82,7 +81,6 @@ function renderAutoComplete(query, results) {
         See Full Results for "${query}"
     </li>`);
     e.on("click",function(){
-        console.log(query);
         $('#search').val(query);
         call();
     });
@@ -135,6 +133,7 @@ async function call() {
         }*/
 }
 function renderFacets(results) {
+    var placholder = $('#autocomplete');
     console.log(results);
 }
 
@@ -182,6 +181,8 @@ function render(results) {
         });
         placholder.append(e);
     });
+    $('#facets').show();
+    $('#sort').show();
     /*setTimeout(function () {
         $("#overlay").fadeOut(300);
     }, 500);*/
