@@ -79,7 +79,7 @@ exports = function (query) {
       $limit:
         3,
     });
-  }/*else if (c == "autocomplete") {
+  }else if (c == "autocomplete") {
     agg_pipeline.push({
       $search: {
         index: "autocomplete",
@@ -87,12 +87,32 @@ exports = function (query) {
           should: [{
             autocomplete: {
               query: q,
-              path: "title",
+              path: "name.en",
             }
           }, {
             autocomplete: {
               query: q,
-              path: "fullplot",
+              path: "name.zh-hk",
+            }
+          } {
+            autocomplete: {
+              query: q,
+              path: "name.zh-cn",
+            }
+          }, {
+            autocomplete: {
+              query: q,
+              path: "merits.en",
+            }
+          }, {
+            autocomplete: {
+              query: q,
+              path: "merits.zh-hk",
+            }
+          }, {
+            autocomplete: {
+              query: q,
+              path: "merits.zh-cn",
             }
           }],
         },
@@ -102,7 +122,7 @@ exports = function (query) {
       $limit:
         5,
     });
-  }*/ else{
+  } else{
     let filters = [];
     if (types && types.length) {
       filters.push({

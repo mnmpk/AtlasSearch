@@ -13,10 +13,10 @@ function init() {
         call();
     });
     $('#search').on("keyup", function () {
-        /*if ($('#search').val().length > 1) {
+        if ($('#search').val().length > 1) {
             clearTimeout(timer);
             timer = setTimeout(autoComplete, 200);
-        }*/
+        }
     });
 }
 
@@ -35,7 +35,7 @@ async function login() {
         console.error(error);
     }
 }
-/*async function autoComplete() {
+async function autoComplete() {
     await app.currentUser.refreshCustomData();
     let query = { "c": "autocomplete", "q": $('#search').val(), "s": $("#ddl").val() };
     renderAutoComplete($('#search').val(), await app.currentUser.functions.chinese(query));
@@ -68,7 +68,7 @@ function renderAutoComplete(query, results) {
     });
     placholder.append(e);
     placholder.show();
-}*/
+}
 
 async function call() {
     $('#autocomplete').hide();
@@ -91,7 +91,7 @@ function render(results) {
                 <h6 class="card-subtitle mb-2 text-muted">${item.district?item.district["zh-hk"]+"("+item.district.en+")":""}</h6>
                 ${item.photo ? '<img class="img-fluid" src="' + item.photo + '" />' : ""}
                 ${highlight(item)}
-                
+                </br>
                 Description:
                 <p class="card-text">${item.merits?item.merits["zh-hk"]+"("+item.merits.en+")":""}</p>
                 <p class="card-text">${item.address?item.address["zh-hk"]+"("+item.address.en+")":""}</p>
