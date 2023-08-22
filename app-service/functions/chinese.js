@@ -138,6 +138,7 @@ exports = function (query) {
       op_date: 1,
       bldg_types: 1,
       district: 1,
+      photo:1,
       score: {
         $meta: "searchScore",
       },
