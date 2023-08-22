@@ -93,10 +93,10 @@ function render(results) {
                 ${item.photo ? '<img class="img-fluid" src="' + item.photo + '" />' : ""}
                 ${highlight(item)}
 
-                ${item.address?item.address["zh-hk"]+"("+item.address.en+")":""}
-                ${item.district["zh-hk"]} (${item.district.en})
-                ${item.op_date}
-                ${item.bldg_types.join(", ")}
+                <p class="card-text">${item.address?item.address["zh-hk"]+"("+item.address.en+")":""}</p>
+                <p class="card-text">${item.district?item.district["zh-hk"]+"("+item.district.en+")":""}</p>
+                <p class="card-text">${item.op_date?item.op_date:""}</p>
+                <p class="card-text">${item.bldg_types?item.bldg_types.join(", "):""}</p>
 
                 
                 <div class="mlt row">
