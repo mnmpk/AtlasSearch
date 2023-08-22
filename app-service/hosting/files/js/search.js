@@ -12,10 +12,32 @@ function init() {
     $('#ddl').on('change', function () {
         call();
     });
-    $('#search').keyup(function () {
-        if($('#search').val().length>1){
-            clearTimeout(timer);
-            timer = setTimeout(autoComplete, 200);
+    $("input[name='search']").on('change', function () {
+        var autocomplete = $('#autocomplete');
+        var sort = $('#sort');
+        var facets = $('#facets');
+        autocomplete.hide();
+        sort.hide();
+        facets.hide();
+        $('#search').off();
+
+        if(this.value=="1"){
+
+        }else if(this.value=="2"){
+
+        }else if(this.value=="3"){
+            sort.show();
+        }else if(this.value=="4"){
+            $('#search').on("keyup", function () {
+                if($('#search').val().length>1){
+                    clearTimeout(timer);
+                    timer = setTimeout(autoComplete, 200);
+                }
+            });
+        }else if(this.value=="5"){
+
+        }else if(this.value=="6"){
+
         }
     });
 }
@@ -144,13 +166,13 @@ function render(results) {
                 <div class="mlt row">
                     <button class="btn btn-leafy btn-sm">Find More Like This</button>
                 </div>
+                <!--button class="btn btn-leafy btn-sm" @onclick="LearnMoreClicked" data-bs-toggle="modal"
+                    data-bs-target="#ctr_modal">Learn More</button-->
 
                 <div class="card-footer text-muted">
                     Score: ${item.score}
                 </div>
 
-                <button class="btn btn-leafy btn-sm" @onclick="LearnMoreClicked" data-bs-toggle="modal"
-                    data-bs-target="#ctr_modal">Learn More</button>
             </div>
         </div>`);
         e.find(".mlt button").on("click",function(){
