@@ -95,7 +95,7 @@ function renderAutoComplete(query, results) {
 async function call() {
     $('#autocomplete').hide();
     await app.currentUser.refreshCustomData();
-    let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val(), "casts": $.map($('input[name="casts"]:checked'), function (c) { return c.value; }), "genres": $.map($('input[name="genres"]:checked'), function (c) { return c.value; }) };
+    let query = { "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val(), "casts": $.map($('input[name="Casts"]:checked'), function (c) { return c.value; }), "genres": $.map($('input[name="Genres"]:checked'), function (c) { return c.value; }) };
     render(await app.currentUser.functions.local(query));
     if (query.c == "final") {
         renderFacets(await app.currentUser.functions.local({ "c": "facets", "q": $('#search').val() }));
@@ -149,7 +149,7 @@ function renderFacets(results) {
         <h2>${facet}</h2>`;
         $.each(results[0][facet], function (index, item) {
             html+=`<div class="form-check">
-            <input class="form-check-input" type="checkbox" name="genres" value="${item._id}" id="${facet+index}" ${$("#"+facet+index).prop('checked')?"checked":""}>
+            <input class="form-check-input" type="checkbox" name="${facet}" value="${item._id}" id="${facet+index}" ${$("#"+facet+index).prop('checked')?"checked":""}>
             <label class="form-check-label" for="${facet+index}">
                 ${item._id} (${item.count})
             </label>
