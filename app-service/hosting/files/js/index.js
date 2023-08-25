@@ -169,7 +169,9 @@ async function mlt(e, item) {
     e.find(".mlt").empty();
     if (mlt.length) {
         $.each(mlt, function (index, i) {
-            e.find(".mlt").append(`<div class="col">${i.poster ? '<img class="img-fluid" src="' + i.poster + '" />' : ""}${i.title}</div>`);
+            if(index){
+                e.find(".mlt").append(`<div class="col">${i.poster ? '<img class="img-fluid" src="' + i.poster + '" />' : ""}${i.title}</div>`);
+            }
         });
     } else {
         e.find(".mlt").append(`<p>This is unique!</p>`);
