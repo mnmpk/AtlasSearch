@@ -153,7 +153,7 @@ async function mlt(e, item) {
     e.find(".mlt").empty();
     if (mlt.length) {
         $.each(mlt, function (index, i) {
-            if(index){
+            if(index>0){
                 e.find(".mlt").append(`<div class="col">${i.photo ? '<img class="img-fluid" src="' + i.photo + '" />' : ""}${i.name["zh-hk"]}</div>`);
             }
         });
