@@ -115,8 +115,8 @@ exports = function (query) {
               path: "merits.zh-cn",
             }
           }],
-          filters: [{
-            $geoWithin: {
+          filter: [{
+            geoWithin: {
               $box: [bl, tr]
             }
           }]
@@ -139,7 +139,7 @@ exports = function (query) {
     }
     if (bl && tr) {
       filters.push({
-        $geoWithin: {
+        geoWithin: {
           $box: [bl, tr]
         }
       });
@@ -168,11 +168,7 @@ exports = function (query) {
     }
     var search = {
       compound: {
-        filter: [{
-          compound: {
-            must:filters
-          }
-        }],
+        filter: filters,
         should: [{
           wildcard: {
             query: "*" + q + "*",
