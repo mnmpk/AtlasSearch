@@ -33,3 +33,6 @@ function deleteMarkers() {
   clearMarkers();
   markers = [];
 }
+function getMap(){
+    return map;
+}

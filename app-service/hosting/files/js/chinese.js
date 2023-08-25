@@ -73,6 +73,14 @@ function renderAutoComplete(query, results) {
 async function call() {
     $('#autocomplete').hide();
     await app.currentUser.refreshCustomData();
+    var map = getMap();
+    if(map){
+        var lat0 = map.getBounds().getNorthEast().lat();
+        var lng0 = map.getBounds().getNorthEast().lng();
+        var lat1 = map.getBounds().getSouthWest().lat();
+        var lng1 = map.getBounds().getSouthWest().lng();
+        console.log(lat0,lng0,lat1,lng1);
+    }
     let query = { "coll": $("input[name='search']:checked").val(), "c": "search", "q": $('#search').val(), "s": $("#ddl").val(), "types": $.map($('input[name="Types"]:checked'), function (c) { return c.value; }), "districts": $.map($('input[name="Districts"]:checked'), function (c) { return c.value; }) };
     render(await app.currentUser.functions.chinese(query));
     renderFacets(await app.currentUser.functions.chinese({ "coll": $("input[name='search']:checked").val(), "c": "facets", "q": $('#search').val() }));
