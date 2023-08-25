@@ -8,6 +8,7 @@ function initMap() {
     zoom: 10,
   };
   map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+  
 }
 // Sets the map on all markers in the array.
 function setAllMap(map) {
@@ -39,4 +40,9 @@ function getViewPort(){
     var lat1 = map.getBounds().getSouthWest().lat();
     var lng1 = map.getBounds().getSouthWest().lng();
     return [[lng1,lat1],[lng0,lat0]];
+}
+function watchBoundChange(callback){
+    map.addListener("bounds_changed", (e) => {
+        callback();
+    });
 }

@@ -39,6 +39,9 @@
         },
         "type": "document"
       },
+      "location": {
+        "type": "geo"
+      },
       "name": {
         "fields": {
           "en": [
