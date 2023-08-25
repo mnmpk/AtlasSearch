@@ -168,7 +168,7 @@ async function mlt(e, item) {
     const mlt = await app.currentUser.functions.local({ "c": "mlt", "t": item.title, "g": item.genres, "fp": item.fullplot })
     e.find(".mlt").empty();
     if (mlt.length) {
-        mlt.pop();
+        mlt.shift();
         $.each(mlt, function (index, i) {
             e.find(".mlt").append(`<div class="col">${i.poster ? '<img class="img-fluid" src="' + i.poster + '" />' : ""}${i.title}</div>`);
         });
