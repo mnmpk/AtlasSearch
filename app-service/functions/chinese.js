@@ -117,7 +117,8 @@ exports = function (query) {
           }],
           filter: [{
             geoWithin: {
-              $box: [bl, tr]
+              $box: [bl, tr],
+              path: "location"
             }
           }]
         },
@@ -140,7 +141,8 @@ exports = function (query) {
     if (bl && tr) {
       filters.push({
         geoWithin: {
-          $box: [bl, tr]
+          $box: [bl, tr],
+          path: "location"
         }
       });
     }
