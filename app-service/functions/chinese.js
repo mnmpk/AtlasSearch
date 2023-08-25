@@ -4,7 +4,7 @@ exports = function (query) {
   // Data can be extracted from the request as follows:
 
   // Query params, e.g. '?arg1=hello&arg2=world' => {arg1: "hello", arg2: "world"}
-  const { c, q, s, n, t, m, d, types, districts } = query;
+  const { coll, c, q, s, n, t, m, d, types, districts } = query;
 
   // Headers, e.g. {"Content-Type": ["application/json"]}
   //const contentTypes = headers["Content-Type"];
@@ -268,6 +268,6 @@ exports = function (query) {
       },
     ];
   }
-  const results = context.services.get("mongodb-atlas").db("search").collection("estate").aggregate(agg_pipeline);
+  const results = context.services.get("mongodb-atlas").db("search").collection(coll).aggregate(agg_pipeline);
   return results;
 };
