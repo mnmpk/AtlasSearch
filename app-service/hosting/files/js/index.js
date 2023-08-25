@@ -168,10 +168,9 @@ async function mlt(e, item) {
     const mlt = await app.currentUser.functions.local({ "c": "mlt", "t": item.title, "g": item.genres, "fp": item.fullplot })
     e.find(".mlt").empty();
     if (mlt.length) {
+        mlt.pop();
         $.each(mlt, function (index, i) {
-            if(index>0){
-                e.find(".mlt").append(`<div class="col">${i.poster ? '<img class="img-fluid" src="' + i.poster + '" />' : ""}${i.title}</div>`);
-            }
+            e.find(".mlt").append(`<div class="col">${i.poster ? '<img class="img-fluid" src="' + i.poster + '" />' : ""}${i.title}</div>`);
         });
     } else {
         e.find(".mlt").append(`<p>This is unique!</p>`);

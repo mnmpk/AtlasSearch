@@ -152,10 +152,9 @@ async function mlt(e, item) {
     const mlt = await app.currentUser.functions.chinese({ "coll": $("input[name='search']:checked").val(), "c": "mlt", "n": item.name, "t": item.bldg_types, "m": item.merits, "d": item.district })
     e.find(".mlt").empty();
     if (mlt.length) {
+        mlt.pop();
         $.each(mlt, function (index, i) {
-            if(index>0){
-                e.find(".mlt").append(`<div class="col">${i.photo ? '<img class="img-fluid" src="' + i.photo + '" />' : ""}${i.name["zh-hk"]}</div>`);
-            }
+            e.find(".mlt").append(`<div class="col">${i.photo ? '<img class="img-fluid" src="' + i.photo + '" />' : ""}${i.name["zh-hk"]}</div>`);
         });
     } else {
         e.find(".mlt").append(`<p>This is unique!</p>`);
