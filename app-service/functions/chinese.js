@@ -77,7 +77,7 @@ exports = function (query) {
     });
     agg_pipeline.push({
       $limit:
-        3,
+        4,
     });
   }else if (c == "autocomplete") {
     agg_pipeline.push({

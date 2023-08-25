@@ -1,0 +1,38 @@
+[
+    {
+      $project:
+        /**
+         * specifications: The fields to
+         *   include or exclude.
+         */
+        {
+          name: {
+            en: "$ENGLISH NAME",
+            "zh-hk": "$中文名稱",
+          },
+          address: {
+            en: "$ENGLISH ADDRESS",
+            "zh-hk": "$中文地址",
+          },
+          district: {
+            en: "$DISTRICT",
+            "zh-hk": "$分區",
+          },
+          bldg_types: ["$中文類別"],
+          location: {
+            type: "Point",
+            coordinates: [
+              "$LONGITUDE",
+              "$LATITUDE",
+            ],
+          },
+        },
+    },
+    {
+      $out:
+        /**
+         * Provide the name of the output collection.
+         */
+        "school",
+    },
+  ]

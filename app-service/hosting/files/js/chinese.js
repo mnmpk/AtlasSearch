@@ -43,6 +43,7 @@ async function autoComplete() {
 function renderAutoComplete(query, results) {
     var placholder = $('#autocomplete');
     placholder.empty();
+    deleteMarkers();
 
     $.each(results, function (index, item) {
         var e = $(`
@@ -114,6 +115,7 @@ function render(results) {
             mlt(e, item);
         });
         placholder.append(e);
+        addMarker(item);
     });
     /*setTimeout(function () {
         $("#overlay").fadeOut(300);
@@ -150,7 +152,9 @@ async function mlt(e, item) {
     e.find(".mlt").empty();
     if (mlt.length) {
         $.each(mlt, function (index, i) {
-            e.find(".mlt").append(`<div class="col">${i.photo ? '<img class="img-fluid" src="' + i.photo + '" />' : ""}${i.name["zh-hk"]}</div>`);
+            if(index){
+                e.find(".mlt").append(`<div class="col">${i.photo ? '<img class="img-fluid" src="' + i.photo + '" />' : ""}${i.name["zh-hk"]}</div>`);
+            }
         });
     } else {
         e.find(".mlt").append(`<p>This is unique!</p>`);
