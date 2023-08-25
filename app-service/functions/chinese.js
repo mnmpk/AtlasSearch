@@ -117,7 +117,16 @@ exports = function (query) {
           }],
           filter: [{
             geoWithin: {
-              box: [bl, tr],
+              box: {
+                bottomLeft: {
+                  type: "Point",
+                  coordinates: bl
+                },
+                topRight: {
+                  type: "Point",
+                  coordinates: tr
+                }
+              },
               path: "location"
             }
           }]
@@ -141,7 +150,16 @@ exports = function (query) {
     if (bl && tr) {
       filters.push({
         geoWithin: {
-          box: [bl, tr],
+          box: {
+            bottomLeft: {
+              type: "Point",
+              coordinates: bl
+            },
+            topRight: {
+              type: "Point",
+              coordinates: tr
+            }
+          },
           path: "location"
         }
       });
