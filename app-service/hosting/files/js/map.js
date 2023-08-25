@@ -17,7 +17,7 @@ function setAllMap(map) {
 }
 
 function addMarker(item){
-    if (map && doc.location) {
+    if (map && item.location) {
         var marker = new google.maps.Marker({ map: map, position: { lat: item.location.coordinates[1], lng: item.location.coordinates[0] } });
         markers.push(marker);
       }
