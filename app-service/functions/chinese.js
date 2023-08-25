@@ -115,7 +115,7 @@ exports = function (query) {
               path: "merits.zh-cn",
             }
           }],
-          filter: [{
+          filters: [{
             $geoWithin: {
               $box: [bl, tr]
             }
