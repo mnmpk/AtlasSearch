@@ -220,6 +220,7 @@ exports = function (query) {
       bldg_types: 1,
       district: 1,
       photo:1,
+      location:1,
       score: {
         $meta: "searchScore",
       },
