@@ -4,7 +4,7 @@ exports = function (query) {
   // Data can be extracted from the request as follows:
 
   // Query params, e.g. '?arg1=hello&arg2=world' => {arg1: "hello", arg2: "world"}
-  const { coll, c, q, s, n, t, m, d, types, districts } = query;
+  const { coll, c, q, s, n, t, m, d, types, districts, bl, tr } = query;
 
   // Headers, e.g. {"Content-Type": ["application/json"]}
   //const contentTypes = headers["Content-Type"];
@@ -30,7 +30,7 @@ exports = function (query) {
   let agg_pipeline = [];
   if (c == "mlt") {
     let like = [];
-    if(n){
+    if (n) {
       like.push({
         "name.en": n.en,
       });
@@ -41,7 +41,7 @@ exports = function (query) {
         "name.zh-cn": n["zh-cn"],
       });
     }
-    if(m){
+    if (m) {
       like.push({
         "merits.en": m.en,
       });
@@ -52,7 +52,7 @@ exports = function (query) {
         "merits.zh-cn": m["zh-cn"],
       });
     }
-    if(d){
+    if (d) {
       like.push({
         "district.en": d.en,
       });
@@ -63,7 +63,7 @@ exports = function (query) {
         "district.zh-cn": d["zh-cn"],
       });
     }
-    if(t){
+    if (t) {
       like.push({
         bldg_types: t,
       });
@@ -79,7 +79,7 @@ exports = function (query) {
       $limit:
         4,
     });
-  }else if (c == "autocomplete") {
+  } else if (c == "autocomplete") {
     agg_pipeline.push({
       $search: {
         index: "autocomplete",
@@ -115,6 +115,11 @@ exports = function (query) {
               path: "merits.zh-cn",
             }
           }],
+          filter: [{
+            $geoWithin: {
+              $box: [bl, tr]
+            }
+          }]
         },
       },
     });
@@ -122,7 +127,7 @@ exports = function (query) {
       $limit:
         5,
     });
-  } else{
+  } else {
     let filters = [];
     if (types && types.length) {
       filters.push({
@@ -134,18 +139,18 @@ exports = function (query) {
     }
     if (districts && districts.length) {
       filters.push({
-        compound:{
-          should:[{
+        compound: {
+          should: [{
             text: {
               query: districts,
               path: "district.en",
             }
-          },{
+          }, {
             text: {
               query: districts,
               path: "district.zh-hk",
             }
-          },{
+          }, {
             text: {
               query: districts,
               path: "district.zh-cn",
@@ -154,12 +159,17 @@ exports = function (query) {
         }
       });
     }
+    filters.push({
+      $geoWithin: {
+        $box: [bl, tr]
+      }
+    });
     var search = {
       compound: {
         filter: filters,
         should: [{
           wildcard: {
-            query: "*"+q+"*",
+            query: "*" + q + "*",
             path: [
               {
                 value: "name.zh-hk",
@@ -186,19 +196,19 @@ exports = function (query) {
                 multi: "canton",
               },
             ],
-            score:{boost:{value:3}},
-            allowAnalyzedField:true
+            score: { boost: { value: 3 } },
+            allowAnalyzedField: true
           },
-        },{
+        }, {
           text: {
             query: q,
-            path: ["name.en", "merits.en", "address.en", "name.zh-hk", "merits.zh-hk", "address.zh-hk","name.zh-cn", "merits.zh-cn", "address.zh-cn"],
+            path: ["name.en", "merits.en", "address.en", "name.zh-hk", "merits.zh-hk", "address.zh-hk", "name.zh-cn", "merits.zh-cn", "address.zh-cn"],
           }
         }],
-        minimumShouldMatch:1,
+        minimumShouldMatch: 1,
       },
       highlight: {
-        path: ["name.en", "merits.en", "address.en", "name.zh-hk", "merits.zh-hk", "address.zh-hk","name.zh-cn", "merits.zh-cn", "address.zh-cn"],
+        path: ["name.en", "merits.en", "address.en", "name.zh-hk", "merits.zh-hk", "address.zh-hk", "name.zh-cn", "merits.zh-cn", "address.zh-cn"],
       }
     };
     if (s == "Opening Year") {
@@ -219,8 +229,8 @@ exports = function (query) {
       op_date: 1,
       bldg_types: 1,
       district: 1,
-      photo:1,
-      location:1,
+      photo: 1,
+      location: 1,
       score: {
         $meta: "searchScore",
       },
@@ -241,7 +251,7 @@ exports = function (query) {
           facet: {
             operator: {
               text: {
-                path: ["name.en", "merits.en","name.zh-hk", "merits.zh-hk","name.zh-cn", "merits.zh-cn"],
+                path: ["name.en", "merits.en", "name.zh-hk", "merits.zh-hk", "name.zh-cn", "merits.zh-cn"],
                 query: q,
               },
             },

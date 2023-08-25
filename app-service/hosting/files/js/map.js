@@ -33,6 +33,10 @@ function deleteMarkers() {
   clearMarkers();
   markers = [];
 }
-function getMap(){
-    return map;
+function getViewPort(){
+    var lat0 = map.getBounds().getNorthEast().lat();
+    var lng0 = map.getBounds().getNorthEast().lng();
+    var lat1 = map.getBounds().getSouthWest().lat();
+    var lng1 = map.getBounds().getSouthWest().lng();
+    return [[lng1,lat1],[lng0,lat0]];
 }
