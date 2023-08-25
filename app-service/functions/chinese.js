@@ -137,6 +137,13 @@ exports = function (query) {
         }
       });
     }
+    if (bl && tr) {
+      filters.push({
+        $geoWithin: {
+          $box: [bl, tr]
+        }
+      });
+    }
     if (districts && districts.length) {
       filters.push({
         compound: {
@@ -159,14 +166,13 @@ exports = function (query) {
         }
       });
     }
-    filters.push({
-      $geoWithin: {
-        $box: [bl, tr]
-      }
-    });
     var search = {
       compound: {
-        filter: filters,
+        filter: [{
+          compound: {
+            must:filters
+          }
+        }],
         should: [{
           wildcard: {
             query: "*" + q + "*",
