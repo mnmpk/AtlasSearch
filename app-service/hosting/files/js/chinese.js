@@ -43,7 +43,6 @@ async function autoComplete() {
 function renderAutoComplete(query, results) {
     var placholder = $('#autocomplete');
     placholder.empty();
-    deleteMarkers();
 
     $.each(results, function (index, item) {
         var e = $(`
@@ -83,6 +82,7 @@ function render(results) {
 
     var placholder = $('#results');
     placholder.empty();
+    deleteMarkers();
 
     $.each(results, function (index, item) {
         var e = $(`
