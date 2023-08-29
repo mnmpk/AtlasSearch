@@ -224,7 +224,6 @@ exports = function (query) {
               multi: "keyword",
             },
           ],
-          score: { boost: { value: 10 } },
           allowAnalyzedField: true
         },
       });
@@ -258,7 +257,7 @@ exports = function (query) {
               multi: "canton",
             },
           ],
-          score: { boost: { value: 10 } },
+          score: { boost: { value: 3 } },
           allowAnalyzedField: true
         },
       });
