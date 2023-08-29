@@ -272,23 +272,30 @@ exports = function (query) {
         $searchMeta: {
           facet: {
             operator: {
-              text: {
-                path: ["name.en", "merits.en", "name.zh-hk", "merits.zh-hk", "name.zh-cn", "merits.zh-cn"],
-                query: q,
-              },
-              geoWithin: {
-                box: {
-                  bottomLeft: {
-                    type: "Point",
-                    coordinates: bl
-                  },
-                  topRight: {
-                    type: "Point",
-                    coordinates: tr
+              compound: {
+                filter: [{
+                  geoWithin: {
+                    box: {
+                      bottomLeft: {
+                        type: "Point",
+                        coordinates: bl
+                      },
+                      topRight: {
+                        type: "Point",
+                        coordinates: tr
+                      }
+                    },
+                    path: "location"
                   }
-                },
-                path: "location"
+                }],
+                must: [{
+                  text: {
+                    path: ["name.en", "merits.en", "name.zh-hk", "merits.zh-hk", "name.zh-cn", "merits.zh-cn"],
+                    query: q,
+                  }
+                }]
               }
+
             },
             facets: {
               typesFacet: {
