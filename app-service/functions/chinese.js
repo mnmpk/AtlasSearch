@@ -320,7 +320,6 @@ exports = function (query) {
       },
     ];
   }
-  console.log(JSON.stringify(agg_pipeline));
   const results = context.services.get("mongodb-atlas").db("search").collection(coll).aggregate(agg_pipeline);
   return results;
 };

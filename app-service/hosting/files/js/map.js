@@ -41,8 +41,11 @@ function getViewPort(){
     var lng1 = map.getBounds().getSouthWest().lng();
     return [[lng1,lat1],[lng0,lat0]];
 }
+
+let timer = null;
 function watchBoundChange(callback){
     map.addListener("bounds_changed", (e) => {
-        callback();
+      clearTimeout(timer);
+      timer = setTimeout(callback, 200);
     });
 }
