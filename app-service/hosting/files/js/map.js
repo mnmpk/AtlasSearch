@@ -42,10 +42,10 @@ function getViewPort(){
     return [[lng1,lat1],[lng0,lat0]];
 }
 
-let timer = null;
+let mapTimer = null;
 function watchBoundChange(callback){
     map.addListener("bounds_changed", (e) => {
-      clearTimeout(timer);
-      timer = setTimeout(callback, 200);
+      clearTimeout(mapTimer);
+      mapTimer = setTimeout(callback, 200);
     });
 }
