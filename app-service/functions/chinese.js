@@ -187,13 +187,13 @@ exports = function (query) {
       });
     }
     var should = [];
+    should.push({
+      text: {
+        query: q,
+        path: ["name.en", "merits.en", "address.en", "name.zh-hk", "merits.zh-hk", "address.zh-hk", "name.zh-cn", "merits.zh-cn", "address.zh-cn"],
+      }
+    });
     if(c=="chinese"){
-      should.push({
-        text: {
-          query: q,
-          path: ["name.en", "merits.en", "address.en", "name.zh-hk", "merits.zh-hk", "address.zh-hk", "name.zh-cn", "merits.zh-cn", "address.zh-cn"],
-        }
-      });
     }else if(c=="keyword"){
       should.push({
         wildcard: {
@@ -224,7 +224,7 @@ exports = function (query) {
               multi: "keyword",
             },
           ],
-          score: { boost: { value: 3 } },
+          score: { boost: { value: 10 } },
           allowAnalyzedField: true
         },
       });
@@ -258,7 +258,7 @@ exports = function (query) {
               multi: "canton",
             },
           ],
-          score: { boost: { value: 3 } },
+          score: { boost: { value: 10 } },
           allowAnalyzedField: true
         },
       });
