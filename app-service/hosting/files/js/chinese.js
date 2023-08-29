@@ -75,7 +75,7 @@ async function call() {
     
     let query = { "coll": $("input[name='search']:checked").val(), "c": "search", "q": $('#search').val(), "s": $("#ddl").val(), "types": $.map($('input[name="Types"]:checked'), function (c) { return c.value; }), "districts": $.map($('input[name="Districts"]:checked'), function (c) { return c.value; }), bl:getViewPort()[0],tr:getViewPort()[1] };
     render(await app.currentUser.functions.chinese(query));
-    renderFacets(await app.currentUser.functions.chinese({ "coll": $("input[name='search']:checked").val(), "c": "facets", "q": $('#search').val() }));
+    renderFacets(await app.currentUser.functions.chinese({ "coll": $("input[name='search']:checked").val(), "c": "facets", "q": $('#search').val(), bl:getViewPort()[0],tr:getViewPort()[1] }));
 }
 
 function render(results) {
