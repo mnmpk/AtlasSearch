@@ -186,47 +186,88 @@ exports = function (query) {
         }
       });
     }
+    var should = [];
+    should.push({
+      text: {
+        query: q,
+        path: ["name.en", "merits.en", "address.en", "name.zh-hk", "merits.zh-hk", "address.zh-hk", "name.zh-cn", "merits.zh-cn", "address.zh-cn"],
+      }
+    });
+    if(c=="chinese"){
+    }else if(c=="keyword"){
+      should.push({
+        wildcard: {
+          query: "*" + q + "*",
+          path: [
+            {
+              value: "name.zh-hk",
+              multi: "keyword",
+            },
+            {
+              value: "name.zh-cn",
+              multi: "keyword",
+            },
+            {
+              value: "merits.zh-hk",
+              multi: "keyword",
+            },
+            {
+              value: "merits.zh-cn",
+              multi: "keyword",
+            },
+            {
+              value: "address.zh-hk",
+              multi: "keyword",
+            },
+            {
+              value: "address.zh-cn",
+              multi: "keyword",
+            },
+          ],
+          score: { boost: { value: 3 } },
+          allowAnalyzedField: true
+        },
+      });
+    }else if(c=="custom"){
+      should.push({
+        wildcard: {
+          query: "*" + q + "*",
+          path: [
+            {
+              value: "name.zh-hk",
+              multi: "canton",
+            },
+            {
+              value: "name.zh-cn",
+              multi: "canton",
+            },
+            {
+              value: "merits.zh-hk",
+              multi: "canton",
+            },
+            {
+              value: "merits.zh-cn",
+              multi: "canton",
+            },
+            {
+              value: "address.zh-hk",
+              multi: "canton",
+            },
+            {
+              value: "address.zh-cn",
+              multi: "canton",
+            },
+          ],
+          score: { boost: { value: 3 } },
+          allowAnalyzedField: true
+        },
+      });
+    }
+    
     var search = {
       compound: {
         filter: filters,
-        should: [{
-          wildcard: {
-            query: "*" + q + "*",
-            path: [
-              {
-                value: "name.zh-hk",
-                multi: "canton",
-              },
-              {
-                value: "name.zh-cn",
-                multi: "canton",
-              },
-              {
-                value: "merits.zh-hk",
-                multi: "canton",
-              },
-              {
-                value: "merits.zh-cn",
-                multi: "canton",
-              },
-              {
-                value: "address.zh-hk",
-                multi: "canton",
-              },
-              {
-                value: "address.zh-cn",
-                multi: "canton",
-              },
-            ],
-            score: { boost: { value: 3 } },
-            allowAnalyzedField: true
-          },
-        }, {
-          text: {
-            query: q,
-            path: ["name.en", "merits.en", "address.en", "name.zh-hk", "merits.zh-hk", "address.zh-hk", "name.zh-cn", "merits.zh-cn", "address.zh-cn"],
-          }
-        }],
+        should: should,
         minimumShouldMatch: 1,
       },
       highlight: {

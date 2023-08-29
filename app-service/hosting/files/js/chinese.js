@@ -3,6 +3,7 @@
 const userAPIKey = "0P0b3hjgzsIhnT0Pq30ffMwOSI6FFQGLCUjvi8dFZZS81AzN3MPLm0jkFw3V8CHX";
 const app = new Realm.App({ id: "search-app-nthoe" });
 let timer = null;
+const coll = "school";
 function init() {
     login();
     $('.btn-search').click(function () {
@@ -36,7 +37,7 @@ async function login() {
 }
 async function autoComplete() {
     await app.currentUser.refreshCustomData();
-    let query = { "coll": $("input[name='search']:checked").val(), "c": "autocomplete", "q": $('#search').val(), "s": $("#ddl").val(), bl:getViewPort()[0],tr:getViewPort()[1] };
+    let query = { "coll": coll, "c": "autocomplete", "q": $('#search').val(), "s": $("#ddl").val(), bl:getViewPort()[0],tr:getViewPort()[1] };
     renderAutoComplete($('#search').val(), await app.currentUser.functions.chinese(query));
 }
 
@@ -73,9 +74,9 @@ async function call() {
     $('#autocomplete').hide();
     await app.currentUser.refreshCustomData();
     
-    let query = { "coll": $("input[name='search']:checked").val(), "c": "search", "q": $('#search').val(), "s": $("#ddl").val(), "types": $.map($('input[name="Types"]:checked'), function (c) { return c.value; }), "districts": $.map($('input[name="Districts"]:checked'), function (c) { return c.value; }), bl:getViewPort()[0],tr:getViewPort()[1] };
+    let query = { "coll": coll, "c": $("input[name='search']:checked").val(), "q": $('#search').val(), "s": $("#ddl").val(), "types": $.map($('input[name="Types"]:checked'), function (c) { return c.value; }), "districts": $.map($('input[name="Districts"]:checked'), function (c) { return c.value; }), bl:getViewPort()[0],tr:getViewPort()[1] };
     render(await app.currentUser.functions.chinese(query));
-    renderFacets(await app.currentUser.functions.chinese({ "coll": $("input[name='search']:checked").val(), "c": "facets", "q": $('#search').val(), bl:getViewPort()[0],tr:getViewPort()[1] }));
+    renderFacets(await app.currentUser.functions.chinese({ "coll": coll, "c": "facets", "q": $('#search').val(), bl:getViewPort()[0],tr:getViewPort()[1] }));
 }
 
 function render(results) {
@@ -149,7 +150,7 @@ function renderFacets(results) {
 }
 
 async function mlt(e, item) {
-    const mlt = await app.currentUser.functions.chinese({ "coll": $("input[name='search']:checked").val(), "c": "mlt", "n": item.name, "t": item.bldg_types, "m": item.merits, "d": item.district })
+    const mlt = await app.currentUser.functions.chinese({ "coll": coll, "c": "mlt", "n": item.name, "t": item.bldg_types, "m": item.merits, "d": item.district })
     e.find(".mlt").empty();
     if (mlt.length) {
         $.each(mlt.shift(), function (index, i) {
