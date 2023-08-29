@@ -206,23 +206,7 @@ exports = function (query) {
             {
               value: "name.zh-cn",
               multi: "keyword",
-            },
-            {
-              value: "merits.zh-hk",
-              multi: "keyword",
-            },
-            {
-              value: "merits.zh-cn",
-              multi: "keyword",
-            },
-            {
-              value: "address.zh-hk",
-              multi: "keyword",
-            },
-            {
-              value: "address.zh-cn",
-              multi: "keyword",
-            },
+            }
           ],
           allowAnalyzedField: true
         },
@@ -239,23 +223,7 @@ exports = function (query) {
             {
               value: "name.zh-cn",
               multi: "canton",
-            },
-            {
-              value: "merits.zh-hk",
-              multi: "canton",
-            },
-            {
-              value: "merits.zh-cn",
-              multi: "canton",
-            },
-            {
-              value: "address.zh-hk",
-              multi: "canton",
-            },
-            {
-              value: "address.zh-cn",
-              multi: "canton",
-            },
+            }
           ],
           score: { boost: { value: 3 } },
           allowAnalyzedField: true
