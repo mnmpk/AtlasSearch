@@ -12,37 +12,35 @@
             "type": "string"
           },
           "zh-cn": {
-            "multi": [{
+            "multi": {
               "canton": {
                 "analyzer": "cantoneseAnalyzer",
                 "searchAnalyzer": "cantoneseAnalyzer",
                 "type": "string"
-              }
-            },{
+              },
               "keyword": {
-                "analyzer": "keywordAnalyzer",
-                "searchAnalyzer": "keywordAnalyzer",
+                "analyzer": "lucene.keyword",
+                "searchAnalyzer": "lucene.keyword",
                 "type": "string"
               }
-            }],
+            },
             "analyzer": "lucene.chinese",
             "searchAnalyzer": "lucene.chinese",
             "type": "string"
           },
           "zh-hk": {
-            "multi": [{
+            "multi": {
               "canton": {
                 "analyzer": "cantoneseAnalyzer",
                 "searchAnalyzer": "cantoneseAnalyzer",
                 "type": "string"
-              }
-            },{
+              },
               "keyword": {
-                "analyzer": "keywordAnalyzer",
-                "searchAnalyzer": "keywordAnalyzer",
+                "analyzer": "lucene.keyword",
+                "searchAnalyzer": "lucene.keyword",
                 "type": "string"
               }
-            }],
+            },
             "analyzer": "lucene.chinese",
             "searchAnalyzer": "lucene.chinese",
             "type": "string"
@@ -58,37 +56,35 @@
             "type": "string"
           },
           "zh-cn": {
-            "multi": [{
+            "multi": {
               "canton": {
                 "analyzer": "cantoneseAnalyzer",
                 "searchAnalyzer": "cantoneseAnalyzer",
                 "type": "string"
-              }
-            },{
+              },
               "keyword": {
-                "analyzer": "keywordAnalyzer",
-                "searchAnalyzer": "keywordAnalyzer",
+                "analyzer": "lucene.keyword",
+                "searchAnalyzer": "lucene.keyword",
                 "type": "string"
               }
-            }],
+            },
             "analyzer": "lucene.chinese",
             "searchAnalyzer": "lucene.chinese",
             "type": "string"
           },
           "zh-hk": {
-            "multi": [{
+            "multi": {
               "canton": {
                 "analyzer": "cantoneseAnalyzer",
                 "searchAnalyzer": "cantoneseAnalyzer",
                 "type": "string"
-              }
-            },{
+              },
               "keyword": {
-                "analyzer": "keywordAnalyzer",
-                "searchAnalyzer": "keywordAnalyzer",
+                "analyzer": "lucene.keyword",
+                "searchAnalyzer": "lucene.keyword",
                 "type": "string"
               }
-            }],
+            },
             "analyzer": "lucene.chinese",
             "searchAnalyzer": "lucene.chinese",
             "type": "string"
@@ -150,37 +146,35 @@
             "type": "string"
           },
           "zh-cn": {
-            "multi": [{
+            "multi": {
               "canton": {
                 "analyzer": "cantoneseAnalyzer",
                 "searchAnalyzer": "cantoneseAnalyzer",
                 "type": "string"
-              }
-            },{
+              },
               "keyword": {
-                "analyzer": "keywordAnalyzer",
-                "searchAnalyzer": "keywordAnalyzer",
+                "analyzer": "lucene.keyword",
+                "searchAnalyzer": "lucene.keyword",
                 "type": "string"
               }
-            }],
+            },
             "analyzer": "lucene.chinese",
             "searchAnalyzer": "lucene.chinese",
             "type": "string"
           },
           "zh-hk": {
-            "multi": [{
+            "multi": {
               "canton": {
                 "analyzer": "cantoneseAnalyzer",
                 "searchAnalyzer": "cantoneseAnalyzer",
                 "type": "string"
-              }
-            },{
+              },
               "keyword": {
-                "analyzer": "keywordAnalyzer",
-                "searchAnalyzer": "keywordAnalyzer",
+                "analyzer": "lucene.keyword",
+                "searchAnalyzer": "lucene.keyword",
                 "type": "string"
               }
-            }],
+            },
             "analyzer": "lucene.chinese",
             "searchAnalyzer": "lucene.chinese",
             "type": "string"
