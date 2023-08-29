@@ -288,12 +288,45 @@ exports = function (query) {
                     path: "location"
                   }
                 }],
-                must: [{
+                should: [{
+                  wildcard: {
+                    query: "*" + q + "*",
+                    path: [
+                      {
+                        value: "name.zh-hk",
+                        multi: "canton",
+                      },
+                      {
+                        value: "name.zh-cn",
+                        multi: "canton",
+                      },
+                      {
+                        value: "merits.zh-hk",
+                        multi: "canton",
+                      },
+                      {
+                        value: "merits.zh-cn",
+                        multi: "canton",
+                      },
+                      {
+                        value: "address.zh-hk",
+                        multi: "canton",
+                      },
+                      {
+                        value: "address.zh-cn",
+                        multi: "canton",
+                      },
+                    ],
+                    score: { boost: { value: 3 } },
+                    allowAnalyzedField: true
+                  },
+                }, {
                   text: {
-                    path: ["name.en", "merits.en", "name.zh-hk", "merits.zh-hk", "name.zh-cn", "merits.zh-cn"],
                     query: q,
+                    path: ["name.en", "merits.en", "address.en", "name.zh-hk", "merits.zh-hk", "address.zh-hk", "name.zh-cn", "merits.zh-cn", "address.zh-cn"],
                   }
-                }]
+                }],
+                minimumShouldMatch: 1,
               }
             },
             facets: {
